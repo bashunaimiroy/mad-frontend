@@ -9,7 +9,9 @@ return superagent.get(`${apiHost}/api/v1/bands`)
 .query({bandIdArray:arr})
 }
 
-
+getNumberOfBands = ()=>{
+    return superagent.get(`${apiHost}/api/v1/numberOfBands`)
+}
 
 }
 
