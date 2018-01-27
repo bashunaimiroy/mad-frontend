@@ -1,3 +1,3 @@
 module.exports = {
-    apiHost: process.env.APIHOST || 'http://localhost:3000'
+    apiHost: "http://mad-backend.herokuapp.com" || 'http://localhost:3000'
 }
