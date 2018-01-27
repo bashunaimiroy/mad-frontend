@@ -1,0 +1,32 @@
+.ArtistCard {
+  background-color:rgb(228, 160, 72);
+  border:1px dotted black;
+  width:100px;
+  padding:20px;
+  text-align:center;
+}
+
+.SocialMediaButton{
+  margin:5px;
+}
+
+.GenreFilter {
+  width:20%;
+  height:500px;
+  background-color: tan;
+}
+
+.PreviewPane{
+  height:500px;
+}
+
+.NavBar{
+  font-size:3em;
+  height:100px;
+  display:flex;
+  justify-content: space-around;
+}
+
+.ProfilePage{
+  text-align:center;
+}
