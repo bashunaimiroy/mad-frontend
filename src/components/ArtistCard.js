@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import SocialMediaButton from './SocialMediaButton'
-import FontAwesome from 'react-fontawesome'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const ButtonGrid = (props) => {
   //the button grid takes the first 4 social media links and returns a grid of buttons for them
-  return (<div><div style={{
-    display: "flex"}
-    }>
-    {props.linksObj.slice(0, 2).map(link => {
-      return <SocialMediaButton name={link.name} url={link.url} />
+  return (<div><div style={{display: "flex"}}>
+    {props.linksObj.slice(0, 2).map((link,index) => {
+      return <SocialMediaButton name={link.name} url={link.url} key={index} />
     })}</div> <div style={
-      {display:"flex"}
-}>
-  {
-    props.linksObj.slice(2, 4).map(link => {
-      return <SocialMediaButton name={link.name} url={link.url} />
-    })
-  }</div >
+      { display: "flex" }
+    }>
+      {
+        props.linksObj.slice(2, 4).map((link,index) => {
+          return <SocialMediaButton name={link.name} url={link.url} key={index} />
+        })
+      }</div >
   </div >)
 }
 class ArtistCard extends Component {
@@ -34,14 +31,14 @@ class ArtistCard extends Component {
     { name: "twitter", url: this.props.band.Twitter }
   ].filter((val) => val !== null)
 
-
+  
   render() {
     return (
       <div className="ArtistCard">
         <ButtonGrid linksObj={this.linksObj} />
-        <Link to={`/band/${this.props.band.Name}`}>
-{this.props.band.Name}
-</Link>
+        <Link to={`/band/${encodeURIComponent(this.props.band.band_name)}`}>
+          {this.props.band.band_name}
+        </Link>
       </div>
     );
   }

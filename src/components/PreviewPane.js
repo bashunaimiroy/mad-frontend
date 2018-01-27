@@ -12,10 +12,10 @@ width: 100%;
 
 class PreviewPane extends Component {
   render() {
-    console.log(this.props.bands)
+    console.log("previewPane received ",this.props.bands.length," bands")
     return (
       <CardWrapper>
-        {this.props.bands.map(band=>{return <ArtistCard band={band} key={band.bandEmail}/>})}
+        {this.props.bands.map(band=>{return <ArtistCard band={band} key={band.band_id}/>})}
       </CardWrapper>
     );
   }
