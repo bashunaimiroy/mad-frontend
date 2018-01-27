@@ -1,10 +1,12 @@
 import superagent from 'superagent';
-
+import { apiHost } from './config/config.js';
 
 class Api {
 
-getBands = ()=>{
-return superagent.get("207.107.68.234/api/bands")
+getBands = (arr)=>{
+    console.log("sending a request to",apiHost)
+return superagent.get(`${apiHost}/api/v1/bands`)
+.query({bandIdArray:arr})
 }
 
 
@@ -12,3 +14,4 @@ return superagent.get("207.107.68.234/api/bands")
 }
 
 export default new Api();
+

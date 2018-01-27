@@ -13,7 +13,10 @@ class Dashboard extends Component {
       <div style={{display:"flex"}}>
 
       <GenreFilter/>
-      <PreviewPane bands={this.props.bands.slice(0,10)}/>
+      {this.props.bands.length?
+        <PreviewPane bands={this.props.bands.slice(0,10)}/>:null
+      
+      }
       </div>
       </div>
     );
