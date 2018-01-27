@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Dashboard from './components/Dashboard'
+import Submit from './components/Submit'
+import About from './components/About'
 import NavBar from './components/NavBar';
 import ProfilePage from './components/ProfilePage'
 import api from './ApiWrapper'
@@ -47,6 +49,8 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <Route exact path="/" render={() => (<Dashboard bands={this.state.bands} />)} />
+          <Route path="/submit" component={Submit} />
+          <Route path="/about" component={About} />
           <Route path="/band/:bandname" component={ProfilePage} />
         </div>
       </BrowserRouter>

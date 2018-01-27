@@ -6,10 +6,8 @@ class NavBar extends Component {
     return (
       <div className="NavBar">
         <Link to="/">LOGO</Link>
-        <div>
           <Link to="/submit">submit</Link>
           <Link to="/about">about this app</Link></div>
-      </div>
     );
   }
 }
