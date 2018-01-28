@@ -1,13 +1,19 @@
 .ArtistCard {
   background-color:rgb(228, 160, 72);
   border:1px dotted black;
-  width:100px;
-  padding:20px;
   text-align:center;
+}
+
+#logo {
+  height:120px;
 }
 
 .SocialMediaButton{
   margin:5px;
+}
+.ArtistCard a {
+  color:white;
+  
 }
 
 .GenreFilter {
@@ -27,6 +33,7 @@
   justify-content: space-around;
   align-items: flex-end;
   padding:10px;
+  margin:25px auto 0px;
 }
 
 .ProfilePage{
