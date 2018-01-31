@@ -9,7 +9,7 @@ class NavBar extends Component {
     return (
       <div className="NavBar">
         <div className="nav-category">
-          <Link to="/"><img src={linelogo}/></Link>
+          <Link to="/"><img src={linelogo} alt="logo"/></Link>
           <Link to="/submit">submit</Link>
           <Link to="/about">about</Link></div>
 
