@@ -17,7 +17,7 @@ class App extends Component {
 
   constructor() {
     super()
-    this.state = { bands: [], genreIDarray: [] }
+    this.state = { bands: [], genreIDarray: [],moreResults:true}
   }
   //this is a function for randomising the elements in an array
   durstenfeldShuffle = (array) => {
@@ -27,16 +27,15 @@ class App extends Component {
     }
     return array
   }
-  //this gets the IDs of all the bands in a given genre, shuffles the results, and stores the shuffled
+  //this gets an array of IDs of all the bands in a given genre, shuffles the array, stores the shuffled
   //array in the state, then retrieves the first twelve.
 
   loadGenreIDs = (genre) =>
     api.getGenreIDs(genre).then(
       results => {
-        console.log("received IDs. results are", results.body)
         this.setState({ genreIDarray: this.durstenfeldShuffle(results.body) },
           ()=>{
-            console.log("successfully changed state");
+            console.log("shuffled array of band IDs is now in state");
             this.getTwelveBands()
           }
         )
@@ -46,22 +45,21 @@ class App extends Component {
   //and retrieves those bands' data from the database.
 
   getTwelveBands = () => {
-
-    let twelveRandomBands = this.state.genreIDarray.splice(0, 12)
-
-    twelveRandomBands = twelveRandomBands.map(obj => obj.band_id)
-
-    console.log("we picked twelve random bands: ", twelveRandomBands)
-    api.getBands(twelveRandomBands).then(
+    if (this.state.genreIDarray.length>0){
+    let nextTwelveBands = this.state.genreIDarray.splice(0, 12)
+    nextTwelveBands = nextTwelveBands.map(obj => obj.band_id)
+    api.getBands(nextTwelveBands).then(
       (results => {
-        this.setState({ bands: results.body },
-          () => console.log("bands were put into state")
+        this.setState(st=>({ bands: st.bands.concat(results.body)}),
+          () => console.log(results.body.length, "bands were put into state")
         )
         console.log(results.body, "are the results of the request")
 
       })
     )
   }
+  else {this.setState({moreResults:false})}
+}
 
   componentDidMount() {
     console.log("process.env.node_env is currently", process.env.NODE_ENV)
@@ -77,7 +75,7 @@ class App extends Component {
           <NavBar />
 
           <Route exact path="/" render={() => (
-            <Dashboard bands={this.state.bands} getTwelveBands={this.getTwelveBands} />)
+            <Dashboard bands={this.state.bands} getTwelveBands={this.getTwelveBands} moreResults={this.state.moreResults}/>)
           } />
 
           <Route path="/submit" component={Submit} />
