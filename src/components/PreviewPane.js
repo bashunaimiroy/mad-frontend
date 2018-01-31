@@ -9,7 +9,7 @@ const CardWrapper = styled.div `
 grid-template-columns : repeat(auto-fit, 200px);
 grid-template-rows: repeat(auto-fit, 200px);
 display: grid; 
-height: 100%
+height: 100%;
 justify-content:center;
 grid-gap: 1em 3%;
 max-width:65%;
