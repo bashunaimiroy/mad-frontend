@@ -11,26 +11,52 @@ import api from './ApiWrapper'
 
 import './App.css';
 
+
+
 class App extends Component {
-   
+
   constructor() {
     super()
-    this.state = { bands: [] }
+    this.state = { bands: [], genreIDarray: [] }
   }
+  //this is a function for randomising the elements in an array
+  durstenfeldShuffle = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+  }
+  //this gets the IDs of all the bands in a given genre, shuffles the results, and stores the shuffled
+  //array in the state, then retrieves the first twelve.
 
-  getNumberOfBands = () =>
-    api.getNumberOfBands.then(results => results)
+  loadGenreIDs = (genre) =>
+    api.getGenreIDs(genre).then(
+      results => {
+        console.log("received IDs. results are", results.body)
+        this.setState({ genreIDarray: this.durstenfeldShuffle(results.body) },
+          ()=>{
+            console.log("successfully changed state");
+            this.getTwelveBands()
+          }
+        )
+      })
 
-  getTwelveBands = (numberOfBands) => {
-    //make a randomise function here that generates something like the following array
-    let exampleArray = [1, 3, 5, 6, 9, 10, 12, 23, 20, 19, 40, 41]
-    exampleArray = exampleArray.map(num => num.toString().concat("1"))
-    console.log("array being passed is", exampleArray)
-    api.getBands(exampleArray).then(
+  //this function slices off the first twelve band IDs from the shuffled array,
+  //and retrieves those bands' data from the database.
+
+  getTwelveBands = () => {
+
+    let twelveRandomBands = this.state.genreIDarray.splice(0, 12)
+
+    twelveRandomBands = twelveRandomBands.map(obj => obj.band_id)
+
+    console.log("we picked twelve random bands: ", twelveRandomBands)
+    api.getBands(twelveRandomBands).then(
       (results => {
         this.setState({ bands: results.body },
-          ()=>console.log("bands were put into state")
-        ) 
+          () => console.log("bands were put into state")
+        )
         console.log(results.body, "are the results of the request")
 
       })
@@ -38,9 +64,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-
+    console.log("process.env.node_env is currently", process.env.NODE_ENV)
+    console.log("process is", process.env)
     console.log("getting bands")
-    this.getTwelveBands(400)
+    this.loadGenreIDs("all")
   }
 
   render() {
@@ -48,7 +75,11 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <NavBar />
-          <Route exact path="/" render={() => (<Dashboard bands={this.state.bands} />)} />
+
+          <Route exact path="/" render={() => (
+            <Dashboard bands={this.state.bands} getTwelveBands={this.getTwelveBands} />)
+          } />
+
           <Route path="/submit" component={Submit} />
           <Route path="/about" component={About} />
           <Route path="/band/:bandname" component={ProfilePage} />

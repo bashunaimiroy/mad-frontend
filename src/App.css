@@ -1,41 +1,52 @@
 .ArtistCard {
-  background-color:rgb(228, 160, 72);
-  border:1px dotted black;
-  text-align:center;
+  background-color: rgb(228, 160, 72);
+  border: 1px dotted black;
+  text-align: center;
+  height:200px;
 }
 
 #logo {
-  height:120px;
+  height: 120px;
+  margin: 0 auto;
 }
 
-.SocialMediaButton{
-  margin:5px;
+.SocialMediaButton {
+  margin: 5px;
 }
+
 .ArtistCard a {
-  color:white;
-  
+  color: white;
 }
 
 .GenreFilter {
-  width:20%;
-  height:500px;
   background-color: tan;
 }
 
-.PreviewPane{
-  height:500px;
+.PreviewPane {
+  width: 80%;
 }
 
-.NavBar{
-  font-size:3em;
-  height:100px;
-  display:flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  padding:10px;
-  margin:25px auto 0px;
+.NavBar {
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  font-size: 1em;
+  max-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
 }
 
-.ProfilePage{
-  text-align:center;
+.NavBar a {
+  margin: 0px 10px;
+}
+
+.nav-category {
+  display: flex;
+  align-items: center;
+  margin:10px;
+}
+
+.ProfilePage {
+  text-align: center;
 }

@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import logo from "../mad-logo.png"
+import linelogo from "../mad-line-logo.png"
+import SearchBar from "./SearchBar"
+import GenreFilter from "./GenreFilter"
+
 class NavBar extends Component {
   render() {
     return (
       <div className="NavBar">
-        <Link to="/"><img id="logo" src={logo} alt="logo"/></Link>
+        <div className="nav-category">
+          <Link to="/"><img src={linelogo}/></Link>
           <Link to="/submit">submit</Link>
-          <Link to="/about">about this app</Link></div>
+          <Link to="/about">about</Link></div>
+
+          <div className="nav-category">
+            <GenreFilter/>
+            <SearchBar/>
+            <button>Go</button>
+            </div>
+          </div>
     );
   }
 }

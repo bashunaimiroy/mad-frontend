@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const SearchInput = styled.input`
 width: 65%;
-height: 40px;
 padding: 0 30px 2px 42px;
 visibility: visible;
 font-size: 14px;

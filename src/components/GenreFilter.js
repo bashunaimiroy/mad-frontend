@@ -5,13 +5,13 @@ class GenreFilter extends Component {
   render() {
     return (
       <div className="GenreFilter">
-Genre List Goes Here
-<ul>
-<li>folk</li>
-  <li>pop</li>
-  <li>electro</li>
-
-</ul>
+<select name="select a genre">
+  <option value="all">Show All Genres</option>
+  <option value="rockalt">Rock/Alternative</option>
+  <option value="singer">Singer-Songwriter</option>
+  <option value="electropop">Electro/Pop</option>
+  <option value="hiphop">Hip-Hop</option>
+  </select>
       </div>
     );
   }
