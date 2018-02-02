@@ -34,7 +34,10 @@ class App extends Component {
   
     api.getGenreIDs(genre).then(
       results => {
-        this.setState({bands:[], genreDisplayed:genre, genreIDarray: this.shuffle(results.body),moreResults:true},
+        this.setState({bands:[], 
+          genreDisplayed:genre, 
+          genreIDarray: this.shuffle(results.body),
+          moreResults:true},
           ()=>{
             console.log("loaded IDs for bands with genre:",genre);
             this.getTwelveBands()
