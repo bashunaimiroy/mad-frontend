@@ -19,8 +19,8 @@ class App extends Component {
     super()
     this.state = { bands: [], genreIDarray: [],moreResults:true}
   }
-  //this is a function for randomising the elements in an array
-  durstenfeldShuffle = (array) => {
+  //this is a Durstenfeld Shuffle function for randomising the elements in an array
+  shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -31,11 +31,12 @@ class App extends Component {
   //array in the state, then retrieves the first twelve.
 
   loadGenreIDs = (genre) =>
+  
     api.getGenreIDs(genre).then(
       results => {
-        this.setState({ genreIDarray: this.durstenfeldShuffle(results.body) },
+        this.setState({bands:[], genreDisplayed:genre, genreIDarray: this.shuffle(results.body),moreResults:true},
           ()=>{
-            console.log("shuffled array of band IDs is now in state");
+            console.log("loaded IDs for bands with genre:",genre);
             this.getTwelveBands()
           }
         )
@@ -72,7 +73,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar />
+          <NavBar loadGenreIDs ={this.loadGenreIDs}/>
 
           <Route exact path="/" render={() => (
             <Dashboard bands={this.state.bands} getTwelveBands={this.getTwelveBands} moreResults={this.state.moreResults}/>)

@@ -25,9 +25,10 @@
   color: white;
 }
 
-.GenreFilter {
-  background-color: tan;
+.genre-filter {
+  width:200px;
 }
+
 
 .PreviewPane {
   width: 80%;

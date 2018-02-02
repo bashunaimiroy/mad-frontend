@@ -5,18 +5,29 @@ import SearchBar from "./SearchBar"
 import GenreFilter from "./GenreFilter"
 
 class NavBar extends Component {
+  constructor(){
+    super()
+    this.state={genre:"All"}
+  }
+
+  genreSet = (genre)=>{
+    this.setState({genre})
+    this.props.loadGenreIDs(genre.value)
+  }
+
   render() {
     return (
       <div className="NavBar">
+      <GenreFilter genre={this.state.genre} handleChange = {this.genreSet}/>
+
         <div className="nav-category">
           <Link to="/"><img src={linelogo} alt="logo"/></Link>
           <Link to="/submit">submit</Link>
           <Link to="/about">about</Link></div>
 
           <div className="nav-category">
-            <GenreFilter/>
             <SearchBar/>
-            <button>Go</button>
+            <button onClick={()=>this.props.loadGenreIDs(this.state.genre)}>Go</button>
             </div>
           </div>
     );

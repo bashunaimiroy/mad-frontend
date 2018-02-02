@@ -13,7 +13,7 @@ height: 100%;
 justify-content:center;
 grid-gap: 1em 3%;
 max-width:65%;
-margin:0 auto;
+margin:0 auto 25px;
 `
 
 class PreviewPane extends Component {
@@ -34,7 +34,7 @@ class PreviewPane extends Component {
   >
                 <CardWrapper>
       {this.props.bands.map(band=><ArtistCard band={band} key={band.band_id}/>)}
-
+      {this.props.moreResults?null:<div style={{textAlign:"center",border:"1px dotted gray"}}>end of results</div>}
                 </CardWrapper>
                 </InfiniteScroll>
       
