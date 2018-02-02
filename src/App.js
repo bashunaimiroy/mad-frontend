@@ -54,7 +54,10 @@ class App extends Component {
     nextTwelveBands = nextTwelveBands.map(obj => obj.band_id)
     api.getBands(nextTwelveBands).then(
       (results => {
-        this.setState(st=>({ bands: st.bands.concat(results.body)}),
+        //we do this second shuffle on the 12 results so that genres with only a few bands
+        //will still present different bands first (e.g. World&Reggae or Classical & Traditional)
+        let shuffledResults = this.shuffle(results.body)
+        this.setState(st=>({ bands: st.bands.concat(shuffledResults)}),
           () => console.log(results.body.length, "bands were put into state")
         )
         console.log(results.body, "are the results of the request")
