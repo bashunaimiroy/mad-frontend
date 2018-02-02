@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
-// import react-select from 'react-select'
+import Select from 'react-select'
+import 'react-select/dist/react-select.css';
+
 
 class GenreFilter extends Component {
+
+  genres = [
+    'Classical & Traditional',
+    'DJ',
+    'Electro/Pop',
+    'Experimental',
+    'Hip-Hop',
+    'Jazz',
+    'Metal',
+    'Punk',
+    'R&B, Soul, Funk',
+    'Rock/Alternative',
+    'Singer-Songwriter',
+    'World & Reggae'
+  ]
   render() {
+    const { genre } = this.props;
+  	const value = genre && genre.value;
     return (
-      <div className="GenreFilter">
-<select name="select a genre">
-  <option value="all">Show All Genres</option>
-  <option value="rockalt">Rock/Alternative</option>
-  <option value="singer">Singer-Songwriter</option>
-  <option value="electropop">Electro/Pop</option>
-  <option value="hiphop">Hip-Hop</option>
-  </select>
-      </div>
+        <Select
+          className = "genre-filter"
+          name="genre-selector"
+          value={value}
+          resetValue = {{ value: "all", label: "Show all Genres" }}
+          onChange = {this.props.handleChange}
+          options={[{ value: "all", label: "Show all Genres" },
+          ...this.genres.map(val => ({ value: val, label: val }))]
+          }
+        />
     );
   }
 }
