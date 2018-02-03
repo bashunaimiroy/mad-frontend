@@ -17,7 +17,7 @@ class App extends Component {
 
   constructor() {
     super()
-    this.state = { bands: [], genreIDarray: [],moreResults:true}
+    this.state = { bands: [], bandIDarray: [], moreResults: true }
   }
   //this is a Durstenfeld Shuffle function for randomising the elements in an array
   shuffle = (array) => {
@@ -28,18 +28,20 @@ class App extends Component {
     return array
   }
   //this gets an array of IDs of all the bands in a given genre, shuffles the array, stores the shuffled
-  //array in the state, then retrieves the first twelve.
+  //array in the state, then slices off the first 12 IDs and queries the database for those bands' info.
 
-  loadGenreIDs = (genre) =>
-  
-    api.getGenreIDs(genre).then(
+  loadBandIDs = (genre, searchterm) =>
+    api.fetchBandIDs(genre, searchterm).then(
       results => {
-        this.setState({bands:[], 
-          genreDisplayed:genre, 
-          genreIDarray: this.shuffle(results.body),
-          moreResults:true},
-          ()=>{
-            console.log("loaded IDs for bands with genre:",genre);
+        this.setState({
+          bands: [],
+          searchtermDisplayed: searchterm,
+          genreDisplayed: genre,
+          bandIDarray: this.shuffle(results.body),
+          moreResults: true
+        },
+          () => {
+            console.log("loaded IDs for bands with genre:", genre);
             this.getTwelveBands()
           }
         )
@@ -49,40 +51,48 @@ class App extends Component {
   //and retrieves those bands' data from the database.
 
   getTwelveBands = () => {
-    if (this.state.genreIDarray.length>0){
-    let nextTwelveBands = this.state.genreIDarray.splice(0, 12)
-    nextTwelveBands = nextTwelveBands.map(obj => obj.band_id)
-    api.getBands(nextTwelveBands).then(
-      (results => {
-        //we do this second shuffle on the 12 results so that genres with only a few bands
-        //will still present different bands first (e.g. World&Reggae or Classical & Traditional)
-        let shuffledResults = this.shuffle(results.body)
-        this.setState(st=>({ bands: st.bands.concat(shuffledResults)}),
-          () => console.log(results.body.length, "bands were put into state")
-        )
-        console.log(results.body, "are the results of the request")
+    //checks if there are band IDs left in the results
+    if (this.state.bandIDarray.length > 0) {
+      let nextTwelveBands = this.state.bandIDarray.splice(0, 12)
+      nextTwelveBands = nextTwelveBands.map(obj => obj.band_id)
+      api.getBands(nextTwelveBands).then(
+        (results => {
+          
+          //we do this second shuffle on the 12 results so that genres with only a few bands
+          //will still present them in a different order (e.g. World&Reggae or Classical & Traditional)
 
-      })
-    )
+          let shuffledResults = this.shuffle(results.body)
+          this.setState(st => ({ bands: st.bands.concat(shuffledResults) }),
+            () => console.log(results.body.length, "bands were put into state")
+          )
+          console.log(results.body, "are the results of the request")
+
+        })
+      )
+    }
+    else { this.setState({ moreResults: false }) }
   }
-  else {this.setState({moreResults:false})}
-}
 
   componentDidMount() {
     console.log("process.env.node_env is currently", process.env.NODE_ENV)
     console.log("process is", process.env)
     console.log("getting bands")
-    this.loadGenreIDs("all")
+    this.loadBandIDs("")
   }
 
   render() {
+    const { bands, moreResults, genreDisplayed, searchtermDisplayed } = this.state
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar loadGenreIDs ={this.loadGenreIDs}/>
+          <NavBar loadBandIDs={this.loadBandIDs} />
 
           <Route exact path="/" render={() => (
-            <Dashboard bands={this.state.bands} getTwelveBands={this.getTwelveBands} moreResults={this.state.moreResults}/>)
+            <Dashboard bands={bands}
+              getTwelveBands={this.getTwelveBands}
+              moreResults={moreResults}
+              genreDisplayed={genreDisplayed}
+              searchtermDisplayed={searchtermDisplayed} />)
           } />
 
           <Route path="/submit" component={Submit} />

@@ -30,7 +30,7 @@ class PreviewPane extends Component {
       pageStart={0}
       loadMore={this.props.getTwelveBands}
       hasMore={this.props.moreResults}
-      loader={<div className="loader" key={0}>Loading artists...</div>}
+      loader={<span className="loader" key={0}>Loading artists...</span>}
   >
                 <CardWrapper>
       {this.props.bands.map(band=><ArtistCard band={band} key={band.band_id}/>)}

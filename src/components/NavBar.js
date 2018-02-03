@@ -7,12 +7,12 @@ import GenreFilter from "./GenreFilter"
 class NavBar extends Component {
   constructor(){
     super()
-    this.state={genre:"All"}
+    this.state={genre:""}
   }
 
   genreSet = (genre)=>{
     this.setState({genre})
-    this.props.loadGenreIDs(genre.value)
+    this.props.loadBandIDs(genre.value)
   }
 
   render() {
