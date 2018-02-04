@@ -12,20 +12,16 @@ display: grid;
 height: 100%;
 justify-content:center;
 grid-gap: 1em 3%;
-max-width:65%;
+max-width:75%;
 margin:0 auto 25px;
 `
 
 class PreviewPane extends Component {
-  constructor(){
-    super()
-    this.state={loading:false}
-  }
+ 
 
   render() {
     console.log("previewPane loaded with ",this.props.bands.length," bands in props.bands")
     return (
-     
       <InfiniteScroll
       pageStart={0}
       loadMore={this.props.getTwelveBands}

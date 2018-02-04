@@ -30,22 +30,26 @@ class App extends Component {
   //this gets an array of IDs of all the bands in a given genre, shuffles the array, stores the shuffled
   //array in the state, then slices off the first 12 IDs and queries the database for those bands' info.
 
-  loadBandIDs = (genre, searchterm) =>
-    api.fetchBandIDs(genre, searchterm).then(
-      results => {
-        this.setState({
-          bands: [],
-          searchtermDisplayed: searchterm,
-          genreDisplayed: genre,
-          bandIDarray: this.shuffle(results.body),
-          moreResults: true
-        },
-          () => {
-            console.log("loaded IDs for bands with genre:", genre);
-            this.getTwelveBands()
-          }
-        )
-      })
+  loadBandIDs = (genre, searchterm) => {
+    this.setState({ resultsLoaded: false }, () =>
+      api.fetchBandIDs(genre, searchterm).then(
+        results => {
+          this.setState({
+            bands: [],
+            searchtermDisplayed: searchterm,
+            genreDisplayed: genre,
+            bandIDarray: this.shuffle(results.body),
+            moreResults: true,
+          },
+            () => {
+              console.log("loaded results for genre:", genre, "and searchterm", searchterm);
+              this.getTwelveBands()
+            }
+          )
+        }
+      )
+    )
+  }
 
   //this function slices off the first twelve band IDs from the shuffled array,
   //and retrieves those bands' data from the database.
@@ -57,12 +61,15 @@ class App extends Component {
       nextTwelveBands = nextTwelveBands.map(obj => obj.band_id)
       api.getBands(nextTwelveBands).then(
         (results => {
-          
+
           //we do this second shuffle on the 12 results so that genres with only a few bands
           //will still present them in a different order (e.g. World&Reggae or Classical & Traditional)
 
           let shuffledResults = this.shuffle(results.body)
-          this.setState(st => ({ bands: st.bands.concat(shuffledResults) }),
+          this.setState(st => ({
+            resultsLoaded: true,
+            bands: st.bands.concat(shuffledResults)
+          }),
             () => console.log(results.body.length, "bands were put into state")
           )
           console.log(results.body, "are the results of the request")
@@ -70,7 +77,7 @@ class App extends Component {
         })
       )
     }
-    else { this.setState({ moreResults: false }) }
+    else { this.setState({ moreResults: false, resultsLoaded: true}) }
   }
 
   componentDidMount() {
@@ -81,19 +88,22 @@ class App extends Component {
   }
 
   render() {
-    const { bands, moreResults, genreDisplayed, searchtermDisplayed } = this.state
+    const { bands, moreResults, genreDisplayed, searchtermDisplayed, resultsLoaded} = this.state
     return (
       <BrowserRouter>
         <div className="App">
           <NavBar loadBandIDs={this.loadBandIDs} />
 
           <Route exact path="/" render={() => (
-            <Dashboard bands={bands}
+            <Dashboard
+              bands={bands}
               getTwelveBands={this.getTwelveBands}
               moreResults={moreResults}
               genreDisplayed={genreDisplayed}
-              searchtermDisplayed={searchtermDisplayed} />)
-          } />
+              searchtermDisplayed={searchtermDisplayed}
+              resultsLoaded={resultsLoaded}
+            />)
+        } />
 
           <Route path="/submit" component={Submit} />
           <Route path="/about" component={About} />

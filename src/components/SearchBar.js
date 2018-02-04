@@ -16,11 +16,19 @@ transition: all 0.2s ease-in-out;
 `;
 
 class SearchBar extends Component {
+  //local state here is necessary because controlled components must be controlled by local state,
+  //not by props passed in by a higher-level component
+  // constructor(props){
+  //   super()
+  //   this.state={value:props.value}
+  // }
   render() {
     return (
-      <div className="SearchBar">
-      <SearchInput/>
-      </div>
+      <form onSubmit={this.props.onSubmit} className="SearchBar">
+      <SearchInput onChange={this.props.onChange} type="text" value={this.props.value} />
+      <button type="submit">Go</button>
+
+      </form>
     );
   }
 }

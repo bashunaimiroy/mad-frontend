@@ -30,9 +30,10 @@
   display:flex;
   flex-direction: column;
   align-items: center;
+
 }
 .Dashboard>div {
-  width:65%;
+  width:85%;
 }
 .genre-filter {
   width:200px;
@@ -67,4 +68,8 @@
 
 .ProfilePage {
   text-align: center;
+}
+
+.results{
+  margin:0 auto 15px;
 }
