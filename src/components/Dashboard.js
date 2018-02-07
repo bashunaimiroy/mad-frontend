@@ -8,7 +8,7 @@ class Dashboard extends Component {
 
   render() {
     //this obtains shorter variable names by destructuring this.props
-    const { bands, getTwelveBands, moreResults, genreDisplayed, searchtermDisplayed, resultsLoaded } = this.props
+    const { bands, getTwelveBands,moreResults, genreDisplayed, searchtermDisplayed, resultsLoaded } = this.props
 
     //these variables will be either a message about the results or null if no results
     const genreResultsMessage = genreDisplayed ? <span key="genre" className="results">displaying results for {genreDisplayed}</span> : null

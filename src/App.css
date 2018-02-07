@@ -1,44 +1,53 @@
+body {
+  /* to avoid the navbar overlapping content */
+  padding-top: 75px;
+}
+
 .ArtistCard {
   background-color: rgb(228, 160, 72);
   text-align: center;
-  height:200px;
+  height: 200px;
 }
 
 #logo {
   height: 120px;
-  display:block;
+  display: block;
   margin: 0 auto;
 }
 
 .header {
-  margin:100px auto 50px;
-
-
+  margin: 0 auto 50px;
 }
 
-.little-message{
-  margin:100px auto;
+.little-message {
+  margin: 100px auto;
 }
+
 .SocialMediaButton {
   margin: 5px;
+}
+.SocialMediaButton a{
+  margin:0 5px;
+color:grey;
 }
 
 .ArtistCard a {
   color: white;
 }
+
 .Dashboard {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-
 }
+
 .Dashboard>div {
-  width:85%;
-}
-.genre-filter {
-  width:200px;
+  width: 85%;
 }
 
+.genre-filter {
+  width: 200px;
+}
 
 .PreviewPane {
   max-width: 80%;
@@ -46,14 +55,14 @@
 
 .NavBar {
   position: fixed;
-  top:0;
+  top: 0;
   background-color: rgb(255, 255, 255);
   width: 100%;
   font-size: 1em;
   max-height: 50px;
   display: flex;
   justify-content: space-between;
-  margin: auto;
+  margin: 0px auto 50px;
 }
 
 .NavBar a {
@@ -63,13 +72,22 @@
 .nav-category {
   display: flex;
   align-items: center;
-  margin:10px;
+  margin: 10px;
 }
 
 .ProfilePage {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.results{
-  margin:0 auto 15px;
+.ProfilePage div {
+  margin:10px auto;
+}
+#profile-photo {
+  max-height:500px;
+}
+.results {
+  margin: 0 auto 15px;
 }

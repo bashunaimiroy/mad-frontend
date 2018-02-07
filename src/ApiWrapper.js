@@ -17,7 +17,10 @@ class Api {
         console.log("sending a IDs request to", apiHost)
         return superagent.get(`${apiHost}/api/v1/genreIDs`).query({ genre, searchterm })
     }
-
+    getSingleBand=(band_id)=>{
+        console.log("sending a request for band data with ID",band_id)
+        return superagent.get(`${apiHost}/api/v1/bandData`).query({band_id})
+    }
 }
 
 export default new Api();

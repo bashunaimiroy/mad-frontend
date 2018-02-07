@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
+import {ButtonLine, linkChecker} from './SocialMediaButton'
 
 
 
 
 class ProfilePage extends Component {
-  render() {
-    return (
-      <div className="ProfilePage">
-        
-        <h1>{this.props.match.params.bandname}</h1>
-        Here we'd make an call to our backend API to get the large image, the bio, emails, etc.
 
-      </div>
+  
+  render() {
+    const idInUrl = encodeURIComponent(this.props.bandObject.band_id)
+    
+    const loaded = !!this.props.bandObject
+    
+    let bandInfo= <div className="ProfilePage">
+            <img id="profile-photo" src={`https://storage.cloud.google.com/montreal-artist-database.appspot.com/images/artist_images/${idInUrl}_full.jpg`} alt={this.props.bandObject.band_name}/>
+            <h1>{this.props.bandObject.band_name}</h1>
+            <ButtonLine links={linkChecker(this.props.bandObject)}/>
+            <div>Genre: {this.props.bandObject.band_genre}</div>
+            <div>Members:{this.props.bandObject.members}</div>
+
+          </div>
+
+    return (
+      loaded? bandInfo:"loading"
     );
   }
 }
