@@ -10,6 +10,15 @@ const linkChecker = (band)=> [
     { name: "instagram", url: band.instagram_url },
     { name: "twitter", url: band.twitter_url }
   ].filter((val) => Boolean(val.url))
+  
+const emailChecker = (band)=> [
+    { name: "Band", url: band.band_email },
+    { name: "Management", url: band.management_email },
+    { name: "Booking", url: band.booking_email },
+    { name: "PR", url: band.pr_email }
+  ].filter((val) => Boolean(val.url))
+
+
 
 const SocialMediaButton = (props)=>{
         return (<div className="SocialMediaButton">
@@ -28,7 +37,7 @@ const ButtonLine = (props) => {
       })}</div>)
   }
   const ButtonGrid = (props) => 
-    //the button grid takes 4 social media links and returns a grid of buttons for them
+    //the button grid takes 4 social media links and returns a 2x2 grid of buttons for them
     (<div style={{
       height: "80%",
       display: "flex",
@@ -41,4 +50,4 @@ const ButtonLine = (props) => {
     </div >)
 
 
-export {SocialMediaButton, ButtonLine,ButtonGrid,linkChecker}
+export {SocialMediaButton, ButtonLine,ButtonGrid,linkChecker,emailChecker}

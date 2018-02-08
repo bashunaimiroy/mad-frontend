@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {ButtonGrid, linkChecker} from './SocialMediaButton'
 import { Link } from 'react-router-dom'
-import artistImage from '../artistImage.jpg'
+import defaultImage from '../leritz.jpg'
 
 class ArtistCard extends Component {
   //this function should be passed the band prop
@@ -20,15 +20,16 @@ class ArtistCard extends Component {
   }
 
   render() {
+    const thumbUrl = this.props.band.thumb_photo_url? this.props.band.thumb_photo_url : defaultImage
     const idInUrl = encodeURIComponent(this.props.band.band_id)
-    //To fix here: I've made a hovered state show another parent div inside the Artistcard,
-    //containing ButtonGrid and the title Link. Need to play with dimensions.
+    //I used the react onMouseEnter and onMouseLeave events to make a hover overlay,
+    //instead of css hover (which isn't supported in React afaik)
     return (
       <div onMouseEnter={() => this.setHovered(true)}
         onMouseLeave={() => this.setHovered(false)}
 
-        style={{ backgroundImage:
-         `url('https://storage.cloud.google.com/montreal-artist-database.appspot.com/images/artist_images/${idInUrl}_thumb.jpg')` }}
+        style={{ background:
+         `#daa5208f url(${thumbUrl}) center/cover no-repeat` }}
          className="ArtistCard">
 
         {this.state.hovered ?
