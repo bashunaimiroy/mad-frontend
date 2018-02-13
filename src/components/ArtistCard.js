@@ -3,6 +3,7 @@ import {ButtonGrid, linkChecker} from './SocialMediaButton'
 import { Link } from 'react-router-dom'
 import defaultImage from '../leritz.jpg'
 import styled from "styled-components"
+import PropTypes from 'prop-types'
 
 const ArtistName = styled.div`
 width: 90%;
@@ -53,6 +54,10 @@ class ArtistCard extends Component {
       </div>
     );
   }
+}
+
+ArtistCard.propTypes = {
+  band:PropTypes.object.isRequired
 }
 
 export default ArtistCard;

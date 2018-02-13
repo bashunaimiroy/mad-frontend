@@ -66,7 +66,7 @@ class Submit extends Component {
           </fieldset>
 
           <fieldset>
-            <GenreFilter id="submit-selector" genre={this.state.admin_genre} handleChange={this.handleGenre} />
+            <GenreFilter id="submit-selector" genre={this.state.admin_genre} handleChange={this.handleGenre} type="submit"/>
           </fieldset>
           <fieldset>
             <input placeholder="Genre" onChange={e => this.setState({ band_genre: e.target.value })} />

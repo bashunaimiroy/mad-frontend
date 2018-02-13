@@ -16,7 +16,12 @@ class App extends Component {
 
   constructor() {
     super()
-    this.state = { bands: [], bandIDarray: [], moreResults: true,currentBand:{band_id:0}}
+    this.state = {
+      bands: [],
+      bandIDarray: [],
+      moreResults: true,
+      currentBand: { band_id: 0 }
+    }
   }
   //this is a Durstenfeld Shuffle function for randomising the elements in an array
   shuffle = (array) => {
@@ -80,13 +85,13 @@ class App extends Component {
   }
 
   getSingleBand = (band_id) => {
-    if (band_id!==this.state.currentBand.band_id){
+    if (band_id !== this.state.currentBand.band_id) {
       api.getSingleBand(band_id)
         .then((response) => this.setState({ currentBand: response.body[0] }
         )
         )
-      }
-    
+    }
+
   }
 
   componentDidMount() {
@@ -120,11 +125,12 @@ class App extends Component {
           <Route path="/submit" component={Submit} />
           <Route path="/about" component={About} />
           <Route path="/band/:id" render={(props) => {
-            let id = parseInt(props.match.params.id,10);
-            if (this.state.currentBand.band_id!==undefined && id!==this.state.currentBand.band_id){
-              console.log("rendering with ID",id,"and currentband ID is", this.state.currentBand.band_id)
-
-            this.getSingleBand(id)}
+            let id = parseInt(props.match.params.id, 10);
+            //checks if it should retrieve new band data
+            if (this.state.currentBand.band_id !== undefined && id !== this.state.currentBand.band_id) {
+              console.log("rendering with ID", id, "and currentband ID is", this.state.currentBand.band_id)
+              this.getSingleBand(id)
+            }
             return <ProfilePage bandObject={currentBand} />
           }} />
         </div>

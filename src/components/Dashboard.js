@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PreviewPane from './PreviewPane';
 // import { Link } from "react-router-dom";
 import logo from "../mad-logo.png"
+import PropTypes from 'prop-types'
+
 
 class Dashboard extends Component {
 
@@ -23,7 +25,10 @@ class Dashboard extends Component {
     const results = bands.length ? [
       genreResultsMessage,
       searchResultsMessage,
-      <PreviewPane key="PreviewPane" bands={bands} getTwelveBands={getTwelveBands} moreResults={moreResults} />
+      <PreviewPane key="PreviewPane" 
+      bands={bands} 
+      getTwelveBands={getTwelveBands} 
+      moreResults={moreResults} />
     ] :
       noResultsMessage
 
@@ -41,6 +46,16 @@ class Dashboard extends Component {
       </div>
     );
   }
+}
+
+Dashboard.propTypes = {
+  bands:PropTypes.array.isRequired,
+  getTwelveBands:PropTypes.func.isRequired,
+  getSingleBand:PropTypes.func.isRequired,
+  moreResults:PropTypes.bool.isRequired,
+  genreDisplayed:PropTypes.string,
+  searchtermDisplayed:PropTypes.string,
+  resultsLoaded:PropTypes.bool
 }
 
 export default Dashboard;

@@ -1,6 +1,7 @@
 import React from "react"
 import FontAwesome from "react-fontawesome"
-
+// takes in a band object with links(possibly null/undefined) returned from a band data query,
+// returns only those which are present
 const linkChecker = (band)=> [
     { name: "music", url: band.music_link },
     { name: "spotify", url: band.spotify_url },
@@ -10,7 +11,7 @@ const linkChecker = (band)=> [
     { name: "instagram", url: band.instagram_url },
     { name: "twitter", url: band.twitter_url }
   ].filter((val) => Boolean(val.url))
-  
+  // does the same with a list of emails
 const emailChecker = (band)=> [
     { name: "Band", url: band.band_email },
     { name: "Management", url: band.management_email },

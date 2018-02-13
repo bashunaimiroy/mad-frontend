@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import linelogo from "../mad-line-logo.png"
 import SearchBar from "./SearchBar"
 import GenreFilter from "./GenreFilter"
+import PropTypes from 'prop-types'
 
 class NavBar extends Component {
   constructor() {
@@ -62,4 +63,7 @@ class NavBar extends Component {
   }
 }
 
+NavBar.propTypes={
+  loadBandIDs:PropTypes.func.isRequired
+}
 export default NavBar;

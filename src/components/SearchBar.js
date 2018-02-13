@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
+import PropTypes from 'prop-types'
 
 const SearchInput = styled.input`
 width: 100%;
@@ -25,20 +26,20 @@ border:none;
 `
 
 class SearchBar extends Component {
-  //local state here is necessary because controlled components must be controlled by local state,
-  //not by props passed in by a higher-level component
-  // constructor(props){
-  //   super()
-  //   this.state={value:props.value}
-  // }
+
   render() {
     return (
       <form onSubmit={this.props.onSubmit} className="SearchBar">
       <SearchInput onChange={this.props.onChange} type="search" placeholder="search for an artist" value={this.props.value} />
-      <SearchButton><FontAwesome name="search"/></SearchButton>
+      {/* <SearchButton><FontAwesome name="search"/></SearchButton> */}
       </form>
     );
   }
+}
+
+SearchBar.propTypes={
+  onSubmit:PropTypes.func.isRequired,
+  onChange:PropTypes.func.isRequired
 }
 
 export default SearchBar;

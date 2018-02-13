@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ButtonLine } from './SocialMediaButton'
 import { linkChecker, emailChecker } from '../lib/validation'
-
+import PropTypes from 'prop-types'
 
 const ContactList = (props) => {
   return <div>
@@ -30,6 +30,10 @@ class ProfilePage extends Component {
       loaded ? bandInfo : "loading"
     );
   }
+}
+
+ProfilePage.propTypes = {
+  bandObject:PropTypes.object.isRequired
 }
 
 export default ProfilePage;

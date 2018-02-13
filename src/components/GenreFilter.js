@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select'
 import 'react-select/dist/react-select.css';
-
+import PropTypes from 'prop-types'
 
 class GenreFilter extends Component {
 
@@ -44,6 +44,15 @@ class GenreFilter extends Component {
       />
     );
   }
+}
+
+const TYPES = ["menuBar","submit"]
+
+
+GenreFilter.propTypes = {
+  genre:PropTypes.any,
+  type:PropTypes.oneOf(TYPES),
+  handleChange:PropTypes.func.isRequired
 }
 
 export default GenreFilter;

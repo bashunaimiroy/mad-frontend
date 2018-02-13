@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ArtistCard from './ArtistCard';
 import styled from "styled-components"
 import InfiniteScroll from 'react-infinite-scroller';
-
+import PropTypes from 'prop-types'
 
 
 const CardWrapper = styled.div`
@@ -37,5 +37,11 @@ class PreviewPane extends Component {
     );
   }
 }
+PreviewPane.propTypes = {
+  bands: PropTypes.array.isRequired,
+  getTwelveBands: PropTypes.func.isRequired,
+  moreResults: PropTypes.bool.isRequired
+}
+
 
 export default PreviewPane
