@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import {ButtonGrid, linkChecker} from './SocialMediaButton'
 import { Link } from 'react-router-dom'
 import defaultImage from '../leritz.jpg'
+import styled from "styled-components"
+
+const ArtistName = styled.div`
+width: 90%;
+margin:0 auto;
+height:25%;
+padding:5px;
+line-height:39px;
+`
+
 
 class ArtistCard extends Component {
   //this function should be passed the band prop
@@ -35,9 +45,9 @@ class ArtistCard extends Component {
         {this.state.hovered ?
           <div style={{ margin: "auto", height: "100%", width: "100%", backgroundColor: "rgba(0,0,0,0.35)" }}>
             <ButtonGrid links={this.validLinks} />
-            <Link to={`/band/${idInUrl}`}>
+            <ArtistName><Link to={`/band/${idInUrl}`}>
               {this.props.band.band_name}
-            </Link>
+            </Link></ArtistName>
           </div>
           : null}
       </div>

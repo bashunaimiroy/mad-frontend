@@ -39,7 +39,7 @@ const ButtonLine = (props) => {
   const ButtonGrid = (props) => 
     //the button grid takes 4 social media links and returns a 2x2 grid of buttons for them
     (<div style={{
-      height: "80%",
+      height: "75%",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",

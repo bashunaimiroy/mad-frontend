@@ -8,7 +8,6 @@ import ProfilePage from './components/ProfilePage'
 import api from './ApiWrapper'
 
 // import { BrowserRouter, Route } from 'react-router-dom';
-
 import './App.css';
 
 

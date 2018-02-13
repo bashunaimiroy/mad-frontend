@@ -1,6 +1,11 @@
 body {
   /* to avoid the navbar overlapping content */
   padding-top: 75px;
+  
+}
+body * {
+  font-family:'Arvo', sans-serif;
+  
 }
 
 .ArtistCard {
@@ -33,6 +38,10 @@ color:grey;
 
 .ArtistCard a {
   color: white;
+  line-height: normal;
+  display:inline-block;
+  /* font-family:'Secular One', sans-serif; */
+  
 }
 
 .Dashboard {
@@ -59,9 +68,12 @@ color:grey;
   background-color: rgb(255, 255, 255);
   width: 100%;
   font-size: 1em;
-  max-height: 50px;
+  max-height: 180px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  
   margin: 0px auto 50px;
 }
 
@@ -69,11 +81,18 @@ color:grey;
   margin: 0px 10px;
 }
 
+
 .nav-category {
   display: flex;
+  flex-direction: row;
   align-items: center;
   margin: 10px;
+  /* font-family:'Secular One', sans-serif; */
+  
 }
+/* .logo-category{
+  flex-direction: row;
+} */
 
 .ProfilePage {
   text-align: center;
@@ -90,4 +109,62 @@ color:grey;
 }
 .results {
   margin: 0 auto 15px;
+}
+
+
+.Submit{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width:500px;
+  margin: 0 auto;   
+}
+.Submit form{
+  margin: 0 auto 50px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.Submit form fieldset{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  border:0;
+  padding:0;
+}
+
+.Submit input{
+  margin:5px 0px;
+  width:100%;
+}
+
+@media screen and (min-width: 768px){
+  .NavBar {
+    max-height:50px;
+  }
+  .NavBar,.nav-category {
+    flex-direction: row;
+  }
+ 
+  .genre-filter{
+    order:-1;
+  }
+  #toggle{
+    display:none;
+  }
+
+}
+/* small screens */
+@media screen and (max-width: 768px){
+  /* .nav-category{
+    margin:0 auto 80px;
+  } */
+  #logo{
+    display:none;
+  }
+
+  .hidden>:not(:first-child) {
+    display:none;
+  }
 }

@@ -19,23 +19,29 @@ class GenreFilter extends Component {
     'Singer-Songwriter',
     'World & Reggae'
   ]
-  allGenreOption = { value: "", label: "Show all Genres" }
-  genreOptions = [this.allGenreOption,
-    ...this.genres.map(val => ({ value: val, label: val }))]
-    
+
+  defaultOption = this.props.type==="menuBar" ?
+    { value: "", label: "Show all Genres"} :
+    { value: false, label: "Choose a Category" }
+
+  genreOptions = this.props.type==="menuBar" ?
+    [this.defaultOption, ...this.genres.map(val => ({ value: val, label: val }))] :
+    [...this.genres.map(val => ({ value: val, label: val }))]
+
   render() {
     const { genre } = this.props;
     const value = genre && genre.value;
-    
+
     return (
-        <Select
-          className = "genre-filter"
-          name="genre-selector"
-          value={value}
-          resetValue = {this.allGenreOption}
-          onChange = {this.props.handleChange}
-          options={this.genreOptions}
-        />
+      <Select
+        className="genre-filter"
+        name="genre-selector"
+        value={value}
+        resetValue={this.defaultOption}
+        onChange={this.props.handleChange}
+        options={this.genreOptions}
+        placeholder={this.defaultOption.label}
+      />
     );
   }
 }
