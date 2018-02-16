@@ -121,7 +121,7 @@ class App extends Component {
               resultsLoaded={resultsLoaded}
             />)
           } />
-
+          
           <Route path="/submit" component={Submit} />
           <Route path="/about" component={About} />
           <Route path="/band/:id" render={(props) => {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {ButtonGrid, linkChecker} from './SocialMediaButton'
+import {ButtonGrid} from './SocialMediaButton'
+import {linkChecker} from '../lib/validation'
 import { Link } from 'react-router-dom'
 import defaultImage from '../leritz.jpg'
 import styled from "styled-components"

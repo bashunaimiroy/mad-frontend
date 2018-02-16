@@ -1,3 +1,4 @@
+//returns an array of all URLs included in this band data object
 const linkChecker = (band)=> [
     { name: "music", url: band.music_link },
     { name: "spotify", url: band.spotify_url },
@@ -8,6 +9,7 @@ const linkChecker = (band)=> [
     { name: "twitter", url: band.twitter_url }
   ].filter((val) => Boolean(val.url))
   
+  //returns an array of all emails included in this band data object
 const emailChecker = (band)=> [
     { name: "Band", address: band.band_email },
     { name: "Management", address: band.management_email },

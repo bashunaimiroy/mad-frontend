@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import firebase from 'firebase';
 import Dropzone from 'react-dropzone'
 import validate from 'validate.js'
-
+import api from '../ApiWrapper'
 
 const dropzoneStyle = {
   margin: "0 auto",
@@ -33,14 +33,26 @@ class Submit extends Component {
   
   handleGenre = option => this.setState({ admin_genre: option })
 
-  handleImageChoose = (accepted,rejected) => {
+  handleImageDrop = (accepted,rejected) => {
     if(accepted){
-    this.setState({ image: URL.createObjectURL(accepted[0]) })}
+    this.setState({ full_image_url: URL.createObjectURL(accepted[0])})}
     else if(rejected){
 
     }
   }
 
+  formSubmit = () => {
+    //todo: 
+    // 1> resize image, set thumbnail to this.state.thumb_image_url
+    // 2> upload both full_ and thumb_ image_url to firebase storage using firebase API
+    // 2> get firebase/google cloud storage storage URLs
+    // 2> update state with new URLs
+    // 3>create band data object from this.state
+    // 4> send band data object to server endpoint (to be created)
+    let bandObject = {...this.state}
+    
+    // api.submitBand(bandObject)
+  }
 
   render() {
     return (
@@ -54,10 +66,10 @@ class Submit extends Component {
                 style={dropzoneStyle}
                 accept="image/*"
                 multiple={false}
-                onDrop={this.handleImageChoose}>
+                onDrop={this.handleImageDrop}>
                 <span style={{ display: "inline-block", margin: "48% auto" }}>Drop an image here or click to choose one</span>
               </Dropzone> :
-              <img style={{ maxHeight: "500px" }} src={this.state.image} alt="user uploaded" />
+              <img style={{ maxHeight: "500px" }} src={this.state.full_image_url} alt="user uploaded" />
             }
           </fieldset>
 

@@ -12,6 +12,7 @@ class NavBar extends Component {
   }
 
   handleGenreChange = (genreObject) => {
+    this.navFoldUp()
     //this changes the controlled component value and clears the current searchterm
     this.setState({ genre: genreObject, searchterm: "" })
     //then does the API call for the results for the genre, all in one action
@@ -26,9 +27,13 @@ class NavBar extends Component {
     let navbarState = this.state.navbarState === "hidden"? "show" : "hidden";
     this.setState({navbarState})
   }
+  navFoldUp = e=>{
+    this.setState({navbarState:"hidden"})
+  }
   search = (e) => {
     //and this one makes the API call, for when they submit a searchterm
     e.preventDefault()
+    this.navFoldUp()
     this.setState({ genre: "" })
     this.props.loadBandIDs("", this.state.searchterm)
   }
@@ -39,15 +44,15 @@ class NavBar extends Component {
         
 
         <div className="nav-category logo-category">
-          <Link to="/"><img src={linelogo} alt="logo" /></Link>
-          <button onClick={this.navToggle}id="toggle">Menu</button>
+          <Link onClick={this.navFoldUp} to="/"><img src={linelogo} alt="logo" /></Link>
+          <button onClick={this.navToggle} id="toggle">Menu</button>
 
         </div>
         <div className="nav-category">
 
-          <Link to="/submit">submit</Link></div>
+          <Link onClick={this.navFoldUp} to="/submit">submit</Link></div>
         <div className="nav-category">
-          <Link to="/about">about</Link></div>
+          <Link onClick={this.navFoldUp} to="/about">about</Link></div>
 
 
         <GenreFilter genre={this.state.genre} handleChange={this.handleGenreChange} type="menuBar" />

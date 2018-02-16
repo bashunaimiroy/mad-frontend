@@ -21,6 +21,11 @@ class Api {
         console.log("sending a request for band data with ID",band_id)
         return superagent.get(`${apiHost}/api/v1/bandData`).query({band_id})
     }
+
+    submitBand = (bandObject)=>{
+        console.log("sending submission of band data, name:",bandObject.band_name)
+        return superagent.post(`${apiHost}/api/v1/submit`).send(bandObject)
+    }
 }
 
 export default new Api();
