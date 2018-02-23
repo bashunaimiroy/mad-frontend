@@ -58,12 +58,19 @@ color:grey;
   width: 200px;
 }
 
+.image-size-warning{
+  margin:20px auto;
+  color:red;
+  text-align:center;
+}
+
 .PreviewPane {
   max-width: 80%;
 }
 
 .NavBar {
   position: fixed;
+  z-index:999;
   top: 0;
   background-color: rgb(255, 255, 255);
   width: 100%;
