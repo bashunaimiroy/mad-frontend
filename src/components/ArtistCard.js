@@ -6,13 +6,6 @@ import defaultImage from '../leritz.jpg'
 import styled from "styled-components"
 import PropTypes from 'prop-types'
 
-const ArtistName = styled.div`
-width: 90%;
-margin:0 auto;
-height:25%;
-padding:5px;
-line-height:39px;
-`
 
 
 class ArtistCard extends Component {
@@ -47,9 +40,9 @@ class ArtistCard extends Component {
         {this.state.hovered ?
           <div style={{ margin: "auto", height: "100%", width: "100%", backgroundColor: "rgba(0,0,0,0.35)" }}>
             <ButtonGrid links={this.validLinks} />
-            <ArtistName><Link to={`/band/${idInUrl}`}>
+            <div className="artist-name"><Link to={`/band/${idInUrl}`}>
               {this.props.band.band_name}
-            </Link></ArtistName>
+            </Link></div>
           </div>
           : null}
       </div>

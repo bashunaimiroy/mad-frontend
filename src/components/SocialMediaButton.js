@@ -7,7 +7,7 @@ import FontAwesome from "react-fontawesome"
 
 const SocialMediaButton = (props)=>{
         return (<div className="SocialMediaButton">
-            <a href={props.url}>
+            <a target="_blank" href={props.url}>
                 <FontAwesome size="3x" name={props.name} />
             </a>
             </div>)

@@ -20,11 +20,10 @@ let config = {
 
 class Api {
 
-    uploadImage = (image)=>{
-        storageRef
-        .child(`images/test/${image.name}`)
+    uploadImage = (image,id)=>{
+        return storageRef
+        .child(`images/temp/${id}_temp.jpg`)
         .put(image)
-        .then(snapshot=>{console.log(snapshot)})
     }
 
     getBands = (arr) => {

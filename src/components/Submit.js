@@ -7,7 +7,6 @@ import Dropzone from 'react-dropzone'
 import validate from 'validate.js'
 import api from '../ApiWrapper'
 
-const cloudinaryPreset = "mhb4c6mg"
 
 const dropzoneStyle = {
   margin: "0 auto",
@@ -48,18 +47,20 @@ class Submit extends Component {
 
   handleImageDrop = (accepted, rejected) => {
     if (accepted) {
-      if (accepted[0].size / 1048576 > 1) {
+      if (accepted[0].size / 1048576 > 2) {
         console.log(accepted[0].size / 1048576, "in mb. too big sir")
-        this.setState({ imageTooBig: true, 
-          imageName: accepted[0].name })
+        this.setState({
+          imageTooBig: true,
+          imageName: accepted[0].name
+        })
       }
       else {
 
         this.setState({
-          full_image_url: URL.createObjectURL(accepted[0]),
+          chosenImage:accepted[0],
+          imagePreviewUrl: URL.createObjectURL(accepted[0]),
           imageTooBig: false
         })
-        api.uploadImage(accepted[0])
       }
     }
     else if (rejected) {
@@ -67,20 +68,62 @@ class Submit extends Component {
     }
   }
 
-  
+
 
   removeImage = (event) => {
     event.preventDefault()
-    window.URL.revokeObjectURL(this.state.full_image_url)
-    this.setState({ full_image_url: null })
+    window.URL.revokeObjectURL(this.state.imagePreviewUrl)
+    this.setState({ imagePreviewUrl: null })
   }
 
+  addBandToDatabase = () => {
+    let { admin_genre,
+      band_name,
+      band_genre,
+      music_link,
+      apple_music_url = "",
+      spotify_url = "",
+      facebook_url = "",
+      instagram_url = "",
+      twitter_url = "",
+      youtube_url = "",
+      band_email = "",
+      management_email = "",
+      booking_email = "",
+      pr_email = "",
+      members = "",
+      band_description = "" } = this.state
 
-  formSubmit = () => {
-    //todo: add image resizing with Firebase Functions. for now we simply limit image size
-    let bandObject = { ...this.state }
+    let bandObj = {
+      admin_genre:admin_genre.value,
+      band_name,
+      band_genre,
+      music_link,
+      apple_music_url,
+      spotify_url,
+      facebook_url,
+      instagram_url,
+      twitter_url,
+      youtube_url,
+      band_email,
+      management_email,
+      booking_email,
+      pr_email,
+      members,
+      band_description
+    }
+    console.log("bandObj is", bandObj,". now submitting")
+    return api.submitBand(bandObj)
+  }
 
-    // api.submitBand(bandObject)
+  formSubmit = (e) => {
+    e.preventDefault()
+    this.addBandToDatabase()
+      .then(response => {
+        console.log("uploading image",this.state.chosenImage,"with response",response)
+        api.uploadImage(this.state.chosenImage, response.body.insertedId)
+        .then(snapshot=>console.log(snapshot))
+      })
   }
 
   render() {
@@ -90,7 +133,7 @@ class Submit extends Component {
         <h1>Submit</h1>
         <form onSubmit={this.formSubmit}>
           <fieldset>
-            {!this.state.full_image_url ?
+            {!this.state.imagePreviewUrl ?
               [<Dropzone
                 key="dropzone"
                 style={dropzoneStyle}
@@ -99,14 +142,14 @@ class Submit extends Component {
                 onDrop={this.handleImageDrop}>
                 <div style={{ display: "inline-block", margin: "44% auto" }}>
                   Images should be roughly square.
-                  <p>1MB maximum, jpeg/png</p>
+                  <p>2MB maximum, jpeg/png</p>
                 </div>
 
               </Dropzone>
                 , this.state.imageTooBig ? <span className="image-size-warning" key="too big message">{this.state.imageName} exceeds the 1mb max filesize</span> : null]
               :
               <div style={{ maxWidth: "90%", margin: "0 auto", position: "relative" }}>
-                <img style={{ width: "100%" }} src={this.state.full_image_url} alt="user uploaded" />
+                <img style={{ width: "100%" }} src={this.state.imagePreviewUrl} alt="user uploaded" />
                 <DeleteButton onClick={this.removeImage}>
                   <FontAwesome size="4x" name="trash" />
                 </DeleteButton>
@@ -125,7 +168,7 @@ class Submit extends Component {
             <input placeholder="Genre" onChange={e => this.setState({ band_genre: e.target.value })} />
           </fieldset>
           <fieldset>
-            <input placeholder="Music Link(Soundcloud or Bandcamp)" onChange={e => this.setState({ music_link: e.target.value })} />
+            <input placeholder="Music Link(Soundcloud, Bandcamp or Band Site)" onChange={e => this.setState({ music_link: e.target.value })} />
             <input placeholder="Apple Music" onChange={e => this.setState({ apple_music_url: e.target.value })} />
             <input placeholder="Spotify" onChange={e => this.setState({ spotify_url: e.target.value })} />
             <input placeholder="Facebook" onChange={e => this.setState({ facebook_url: e.target.value })} />
@@ -136,7 +179,9 @@ class Submit extends Component {
 
           <fieldset>
             <input placeholder="Members" onChange={e => this.setState({ members: e.target.value })} />
+
           </fieldset>
+          <textarea rows="5" placeholder="Short Bio (500~ characters)" onChange={e => this.setState({ band_description: e.target.value })} />
 
           <fieldset>
             <input type="email" placeholder="Band Email" onChange={e => this.setState({ band_email: e.target.value })} />
