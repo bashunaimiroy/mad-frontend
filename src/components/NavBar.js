@@ -40,7 +40,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div className={"NavBar "+this.state.navbarState}>
+      <div className={"NavBar "+this.state.navbarState} onClick={this.props.onClick}>
         
 
         <div className="nav-category logo-category">

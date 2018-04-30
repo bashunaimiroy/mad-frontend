@@ -26,8 +26,13 @@ console.log(props.members)
 }
 
 class ProfilePage extends Component {
-
+  componentDidMount(){
+    window.scrollTo(0, 0)
+  
+  }
+  
   render() {
+    
     console.log("rendering")
     const loaded = !!this.props.bandObject
 
