@@ -38,7 +38,6 @@ class Modal extends Component {
 	handleSubmit=(e)=>{
 		e.preventDefault()
 		let email = this.state.email
-		console.log(email)
 		//do mail-list submit thing here
 		//then, as a callback:
 		localStorage.setItem('subscribed',true)
@@ -47,7 +46,6 @@ class Modal extends Component {
 	}
 
 	render() {
-		// console.log(this.props)
 		return <ReactCSSTransitionGroup 
 					transitionName='fade'
 					transitionEnterTimeout={500}

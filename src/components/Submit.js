@@ -132,7 +132,7 @@ class Submit extends Component {
 
         <h1>Submit</h1>
         <form onSubmit={this.formSubmit}>
-          <fieldset>
+          <fieldset className="submit__image-drop">
             {!this.state.imagePreviewUrl ?
               [<Dropzone
                 key="dropzone"
@@ -157,17 +157,17 @@ class Submit extends Component {
             }
           </fieldset>
 
-          <fieldset>
+          <fieldset className="submit__field">
             <input style={{ height: "50px", fontSize: "1.5em" }} placeholder="Artist Name" onChange={e => this.setState({ band_name: e.target.value })} />
           </fieldset>
 
-          <fieldset>
+          <fieldset className="submit__field">
             <GenreFilter id="submit-selector" genre={this.state.admin_genre} handleChange={this.handleGenre} type="submit" />
           </fieldset>
-          <fieldset>
+          <fieldset className="submit__field">
             <input placeholder="Genre" onChange={e => this.setState({ band_genre: e.target.value })} />
           </fieldset>
-          <fieldset>
+          <fieldset className="submit__field">
             <input placeholder="Music Link(Soundcloud, Bandcamp or Band Site)" onChange={e => this.setState({ music_link: e.target.value })} />
             <input placeholder="Apple Music" onChange={e => this.setState({ apple_music_url: e.target.value })} />
             <input placeholder="Spotify" onChange={e => this.setState({ spotify_url: e.target.value })} />
@@ -177,13 +177,13 @@ class Submit extends Component {
             <input placeholder="Twitter" onChange={e => this.setState({ twitter_url: e.target.value })} />
           </fieldset>
 
-          <fieldset>
+          <fieldset className="submit__field">
             <input placeholder="Members" onChange={e => this.setState({ members: e.target.value })} />
 
           </fieldset>
-          <textarea rows="5" placeholder="Short Bio (500~ characters)" onChange={e => this.setState({ band_description: e.target.value })} />
+          <textarea className="submit__textarea" rows="5" placeholder="Short Bio (500~ characters)" onChange={e => this.setState({ band_description: e.target.value })} />
 
-          <fieldset>
+          <fieldset className="submit__field">
             <input type="email" placeholder="Band Email" onChange={e => this.setState({ band_email: e.target.value })} />
             <input type="email" placeholder="Management Email" onChange={e => this.setState({ management_email: e.target.value })} />
             <input type="email" placeholder="Booking Email" onChange={e => this.setState({ booking_email: e.target.value })} />

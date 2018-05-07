@@ -12,7 +12,7 @@ display: grid;
 height: 100%;
 justify-content:center;
 grid-gap: 1em 3%;
-max-width:75%;
+max-width:1100px;
 margin:0 auto 25px;
 `
 
@@ -23,6 +23,7 @@ class PreviewPane extends Component {
     console.log("previewPane loaded with ", this.props.bands.length, " bands in props.bands")
     return (
       <InfiniteScroll
+        className="grid-container"
         pageStart={0}
         loadMore={this.props.getTwelveBands}
         hasMore={this.props.moreResults}

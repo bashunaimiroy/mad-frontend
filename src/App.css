@@ -1,6 +1,19 @@
+@import './reset.css';
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+a {
+	word-wrap: break-word;
+}
+
 body {
   /* to avoid the navbar overlapping content */
-  padding-top: 75px;
+  padding-top: 60px;
   
 }
 body * {
@@ -20,6 +33,46 @@ height:25%;
 padding:5px;
 line-height:39px;
 }
+.about {
+  width: 75%;
+  margin:auto;
+}
+@media only screen and (min-width:768px){
+  .about{
+  width:65%;  }
+}
+.about__heading{
+  text-align:center;
+  padding:40px 0;
+  font-size:2rem;
+  margin-bottom:2rem;
+}
+.about__subheading{
+  font-size:1.5rem;
+  margin-top:1rem;
+  margin-bottom:1rem;
+}
+.about__list{
+  list-style: square;
+  padding-left:20px;
+}
+.about__list li{
+  margin:1rem 0;
+}
+.about__paragraph{
+  display: block;
+  font-size:1rem;
+  line-height:1.2rem;
+  letter-spacing:0.2px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+}
+.about__section{
+  margin: 40px 0;
+}
+
 
 #logo {
   height: 120px;
@@ -57,12 +110,15 @@ color:grey;
   align-items: center;
 }
 
-.Dashboard>div {
+.grid-container {
   width: 85%;
 }
 
 .genre-filter {
   width: 200px;
+}
+.genre-filter Select{
+  width:100%;
 }
 
 .image-size-warning{
@@ -82,7 +138,6 @@ color:grey;
   background-color: rgb(255, 255, 255);
   width: 100%;
   font-size: 1em;
-  max-height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -101,13 +156,25 @@ color:grey;
   flex-direction: row;
   align-items: center;
   margin: 10px;
+  flex: 0 1 50%;
   /* font-family:'Secular One', sans-serif; */
   
 }
-/* .logo-category{
-  flex-direction: row;
-} */
+.nav-category--center{
+  flex: 1 1 0%;
+  display:flex;
+}
+.nav-category--right{
+  justify-content:flex-end;
+}
+.logo-category{
+  flex: 1 1 0%;
+  margin: 0 10px;
+}
+#navbar-logo{
+ width: 230px; 
 
+}
 .ProfilePage {
   text-align: center;
   display: flex;
@@ -115,18 +182,43 @@ color:grey;
   align-items: center;
   padding-bottom:50px;
 }
-
+.ProfilePage #profile-photo{
+  max-width: 100%;
+}
 .ProfilePage div {
   margin:10px auto;
 }
 #profile-photo {
   max-height:500px;
 }
-.results {
-  margin: 0 auto 15px;
+.profile__heading{
+  text-align:center;
+  padding:40px 0;
+  font-size:2rem;
 }
 
+.profile__subheading{
+  font-size:1.5rem;
+  margin-top:1rem;
+  margin-bottom:1rem;
+}
+.results {
+  margin: 0 auto 15px;
+  padding:10px;
+}
+.results__text{
+  margin: 0 10px;
+}
+.search-bar{
+  display:flex;
+  flex-flow:row nowrap;
+}
+.search__icon{
+  padding:0 10px;
 
+}
+.search__cross{
+}
 .Submit{
   display: flex;
   flex-direction: column;
@@ -140,13 +232,23 @@ color:grey;
   flex-direction: column;
   width: 100%;
 }
-.Submit form fieldset{
-  margin: 0 auto;
+.submit__field, .submit__textarea {
+  margin:0 10px;
   display: flex;
   flex-direction: column;
-  width:100%;
   border:0;
-  padding:0;
+}
+.submit__textarea{
+  border:1px solid rgba(230, 230, 230, 0.5);
+}
+.submit__field input {
+  border:none;
+  border-bottom:1px solid rgba(230, 230, 230, 0.5); 
+  padding:4px 0;
+}
+.submit__image-drop{
+  margin:20px auto;
+  width:100%;
 }
 
 .Submit input{
@@ -168,11 +270,33 @@ color:grey;
   opacity:0;
   transition: opacity 500ms ease-in;
 }
-
-@media screen and (min-width: 768px){
-  .NavBar {
-    max-height:50px;
+.searchie-enter{
+  width:25px;
+}
+.searchie-enter-active{
+  width:100px;
+  transition: width 500ms ease-in;
+}
+.searchie-leave{
+  width:500px;
+}
+.searchie-leave-active{
+  width:25px;
+  transition: width 500ms ease-in;
+}
+#toggle{
+  flex: 0 1 50%;
+}
+@media screen and (min-width:576px){
+  body{
+    padding-top:103px;
   }
+  #navbar-logo{
+    width:unset;
+  }
+}
+@media screen and (min-width: 992px){
+ 
   .NavBar,.nav-category {
     flex-direction: row;
   }
@@ -183,10 +307,18 @@ color:grey;
   #toggle{
     display:none;
   }
+  .nav-category__spacer--left{
+    display:none;
+  }
+  .mobile-navbar{
+    display:none;
+  }
+  
+  
 
 }
 /* small screens */
-@media screen and (max-width: 768px){
+@media screen and (max-width: 992px){
   /* .nav-category{
     margin:0 auto 80px;
   } */
@@ -194,7 +326,10 @@ color:grey;
     display:none;
   }
 
-  .hidden>:not(:first-child) {
+  .large-screen {
+    display:none;
+  }
+  .mobile-navbar--hidden{
     display:none;
   }
 }

@@ -3,6 +3,7 @@ import PreviewPane from './PreviewPane';
 // import { Link } from "react-router-dom";
 import logo from "../mad-logo.png"
 import PropTypes from 'prop-types'
+import FontAwesome from 'react-fontawesome'
 
 
 class Dashboard extends Component {
@@ -13,8 +14,14 @@ class Dashboard extends Component {
     const { bands, getTwelveBands,moreResults, genreDisplayed, searchtermDisplayed, resultsLoaded } = this.props
 
     //these variables will be either a message about the results or null if no results
-    const genreResultsMessage = genreDisplayed ? <span key="genre" className="results">displaying results for {genreDisplayed}</span> : null
-    const searchResultsMessage = searchtermDisplayed ? <span key="searchterm" className="results">displaying results for "{searchtermDisplayed}"</span> : null
+    const genreResultsMessage = genreDisplayed ? 
+    <div className="results">
+      <span key="genre" className="results__text">displaying results for {genreDisplayed}</span>
+      <FontAwesome name='times' onClick={this.props.resetDashboard}/>
+    </div> : null
+  const searchResultsMessage = searchtermDisplayed ? 
+  
+    <div className="results"><span key="searchterm" className="results__text">displaying results for "{searchtermDisplayed}"</span><FontAwesome name='times' onClick={this.props.resetDashboard}/></div> : null
 
     //this variable is only displayed if our filter/search request came back but no bands were passed in,
     //which should only happen if there were no results at all for that genre/searchterm
@@ -34,10 +41,7 @@ class Dashboard extends Component {
 
     return (
       <div className="Dashboard">
-        <div className="header">
-          <img id="logo" src={logo} alt="logo" />
-
-        </div>
+        
 
         {resultsLoaded ?
           results : <span className="little-message">loading artists...</span>

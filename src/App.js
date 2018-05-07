@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, withRouter } from 'react-router-dom'
 import Dashboard from './components/Dashboard'
 import Submit from './components/Submit'
 import About from './components/About'
@@ -11,6 +11,19 @@ import Modal from './components/Modal'
 // import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 
+class ScrollToTop extends Component {
+	componentDidUpdate(prevProps) {
+	  if (this.props.location !== prevProps.location) {
+		window.scrollTo(0, 0)
+	  }
+	}
+  
+	render() {
+	  return this.props.children
+	}
+  }
+
+const ScrollWithRouter = withRouter(ScrollToTop)
 
 
 class App extends Component {
@@ -48,7 +61,6 @@ class App extends Component {
 						moreResults: true,
 					},
 						() => {
-							console.log("loaded results for genre:", genre, "and searchterm", searchterm);
 							this.getTwelveBands()
 						}
 					)
@@ -99,39 +111,42 @@ class App extends Component {
 		setTimeout(this.openModal, 4000);
 	}
 
-	openModal = ()=>{
+	openModal = () => {
 		console.log("we're opening modal")
-		this.setState({showModal:true})
+		this.setState({ showModal: true })
 	}
-	closeModal = ()=>{
+	closeModal = () => {
 		console.log('closing modal');
-		this.setState({ showModal:false})
+		this.setState({ showModal: false })
 	}
 
 	componentDidMount() {
-		console.log("process.env.node_env is currently", process.env.NODE_ENV)
-		console.log("process is", process.env)
-		console.log("getting bands")
+		
 		this.loadBandIDs("")
 		let subscribed = localStorage.getItem('subscribed')
-		console.log('localStorage subscribed is:', subscribed)
 		if (!subscribed) { this.askToSubscribe() }
 	}
 
+	resetDashboard = ()=>{
+		this.loadBandIDs("")
+	}	
+
 	render() {
 		//this obtains shorter variable names by destructuring this.state
-		console.log("rendering App.js")
 		const { bands, moreResults, genreDisplayed, searchtermDisplayed, resultsLoaded, currentBand } = this.state
 		return (
 			<BrowserRouter>
+				<ScrollWithRouter>
 				<div className="App" >
-					
-					<Modal closeModal={this.closeModal} display={this.state.showModal} key="unique-key" />
-					
-					<NavBar loadBandIDs={this.loadBandIDs} onClick={this.openModal}/>
 
-					<Route exact path="/" render={() => (
+					<Modal closeModal={this.closeModal} display={this.state.showModal} key="unique-key" />
+					<Route render={(props)=><NavBar {...props} loadBandIDs={this.loadBandIDs} />}>
+						
+					</Route>
+					<Route exact path="/" render={(props) => (
 						<Dashboard
+							{...props}
+							resetDashboard = {this.resetDashboard}
 							bands={bands}
 							getTwelveBands={this.getTwelveBands}
 							getSingleBand={this.getSingleBand}
@@ -154,6 +169,7 @@ class App extends Component {
 						return <ProfilePage bandObject={currentBand} />
 					}} />
 				</div>
+				</ScrollWithRouter>
 			</BrowserRouter>
 		);
 	}

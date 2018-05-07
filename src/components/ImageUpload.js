@@ -8,7 +8,6 @@ class ImageChoose extends Component {
         userFile.urls={regular:URL.createObjectURL(userFile),
             thumb:URL.createObjectURL(userFile)}
         userFile.userUploaded=true
-        console.log("we added local urls to the userFile:",userFile.urls)
         
         this.props.selectImage(userFile)
     }

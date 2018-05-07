@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
-import linelogo from "../mad-line-logo.png"
-import SearchBar from "./SearchBar"
-import GenreFilter from "./GenreFilter"
-import PropTypes from 'prop-types'
+import { Link} from "react-router-dom";
+import linelogo from "../Katalogue-Montreal.png"
+import SearchBar from "./SearchBar";
+import GenreFilter from "./GenreFilter";
+import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome'
 
 class NavBar extends Component {
   constructor() {
     super()
-    this.state = { genre: "", searchterm: "", navbarState:"hidden"}
+    this.state = { genre: "", searchterm: "", navbarState: "hidden", showSearch: false }
   }
 
   handleGenreChange = (genreObject) => {
@@ -23,12 +24,15 @@ class NavBar extends Component {
     //this function changes the controlled component value
     this.setState({ searchterm: e.target.value })
   }
-  navToggle = e=>{
-    let navbarState = this.state.navbarState === "hidden"? "show" : "hidden";
-    this.setState({navbarState})
+  navToggle = e => {
+    let navbarState = this.state.navbarState === "hidden" ? "show" : "hidden";
+    this.setState({ navbarState })
   }
-  navFoldUp = e=>{
-    this.setState({navbarState:"hidden"})
+  navFoldUp = e => {
+    this.setState({ navbarState: "hidden" })
+  }
+  toggleSearchBar = e => {
+    this.setState(st => ({ showSearch: !st.showSearch }))
   }
   search = (e) => {
     //and this one makes the API call, for when they submit a searchterm
@@ -36,39 +40,72 @@ class NavBar extends Component {
     this.navFoldUp()
     this.setState({ genre: "" })
     this.props.loadBandIDs("", this.state.searchterm)
+    this.props.history.push('/')
   }
 
   render() {
     return (
-      <div className={"NavBar "+this.state.navbarState} onClick={this.props.onClick}>
-        
-
+      <div className="NavBar" onClick={this.props.onClick}>
+      <div className="nav-category nav-category--center">
+        <div className="nav-category nav-category__spacer--left">
+        {/* nothing in here, just takes up space */}
+        </div>
         <div className="nav-category logo-category">
-          <Link onClick={this.navFoldUp} to="/"><img src={linelogo} alt="logo" /></Link>
-          <button onClick={this.navToggle} id="toggle">Menu</button>
+          <div className="logo-category__logo">
+            <Link onClick={this.navFoldUp} to="/"><img src={linelogo} alt="logo" id="navbar-logo"/></Link>
+          </div>
+        </div>
+        <button className="nav-category--right" onClick={this.navToggle} id="toggle">
+            <FontAwesome name='bars'/>
+        </button>
+      </div>
+        <div className="nav-category genre-filter large-screen">
+          <GenreFilter genre={this.state.genre} handleChange={this.handleGenreChange} type="menuBar" />
 
         </div>
-        <div className="nav-category">
+        
+        <div className="nav-category large-screen nav-category--right">
+        {this.state.showSearch? null : 
+         [ <Link onClick={this.navFoldUp} to="/submit" key="submit">submit</Link>,
+          <Link onClick={this.navFoldUp} to="/about" key="about">about</Link>]
+        }
 
-          <Link onClick={this.navFoldUp} to="/submit">submit</Link></div>
-        <div className="nav-category">
-          <Link onClick={this.navFoldUp} to="/about">about</Link></div>
-
-
-        <GenreFilter genre={this.state.genre} handleChange={this.handleGenreChange} type="menuBar" />
-
-        <div className="nav-category">
           <SearchBar
             value={this.state.searchterm}
             onChange={this.handleSearchChange}
-            onSubmit={this.search} />
+            onSubmit={this.search}
+            showSearch={this.state.showSearch} 
+            toggleSearch={this.toggleSearchBar}/>
+        </div>
+
+        <div className={"mobile-navbar mobile-navbar--" + this.state.navbarState}>
+          <div className="nav-category genre-filter small-screen">
+            <GenreFilter genre={this.state.genre} handleChange={this.handleGenreChange} type="menuBar" />
+
+          </div>
+          
+          <div className="nav-category small-screen">
+          <Link onClick={this.navFoldUp} to="/submit" key="submit">submit</Link>
+          </div>
+
+          <div className="nav-category small-screen">
+            <Link onClick={this.navFoldUp} to="/about" key="about">about</Link>
+          </div>
+          <div className="nav-category small-screen">
+            <SearchBar
+              value={this.state.searchterm}
+              onChange={this.handleSearchChange}
+              onSubmit={this.search}
+              mobileSearch={true}
+              toggleSearch={this.toggleSearchBar}/>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-NavBar.propTypes={
-  loadBandIDs:PropTypes.func.isRequired
+NavBar.propTypes = {
+  loadBandIDs: PropTypes.func.isRequired
 }
 export default NavBar;
