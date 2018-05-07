@@ -30,10 +30,15 @@ class SearchBar extends Component {
   render() {
     return (
         this.props.mobileSearch?
+        
         <div className="search-bar" key="searchbar">
+          <form onSubmit={this.props.onSubmit} >
 
           <SearchInput onChange={this.props.onChange} type="search" placeholder="search for an artist" value={this.props.value} />
+          </form>
+
           <FontAwesome name='search' className='search__icon'/> 
+          
         </div>
 
         :

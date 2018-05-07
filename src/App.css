@@ -130,7 +130,15 @@ color:grey;
 .PreviewPane {
   max-width: 80%;
 }
-
+.modal__text{
+  padding:15px 10px;
+}
+.modal__form__input{
+  font-size:1rem;
+}
+.modal__button{
+  margin:10px
+}
 .NavBar {
   position: fixed;
   z-index:999;

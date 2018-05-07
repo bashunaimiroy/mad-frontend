@@ -108,7 +108,7 @@ class App extends Component {
 
 	}
 	askToSubscribe = () => {
-		setTimeout(this.openModal, 4000);
+		setTimeout(this.openModal, 30000);
 	}
 
 	openModal = () => {
