@@ -7,9 +7,9 @@ class About extends Component {
   render() {
     return (
       <div className="about">
-        <h1 className="about__heading">
+        {/* <h1 className="about__heading">
           KickDrum | Katalogue
-        </h1>
+        </h1> */}
 
         <div className="about__section"><h2 className="about__subheading">
           Our Mission
