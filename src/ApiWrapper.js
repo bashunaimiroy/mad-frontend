@@ -20,7 +20,7 @@ let config = {
 
 class Api {
     subscribeToNewsletter = (email)=>{
-        return superagent.post(`${apiHost}/api/v1/newsletter-subscribe`).send({email:email})
+        return superagent.post(`${apiHost}/api/v1/newsletter-subscribe`).send({email:email}).catch(err=>err)
     }
     uploadImage = (image,id)=>{
         return storageRef

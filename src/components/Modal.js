@@ -48,6 +48,7 @@ class Modal extends Component {
 					this.setState({ subscribed: true, subscribeError: false })
 					setTimeout(this.props.closeModal, 3000)
 				} else {
+					console.error(response)
 					this.setState({ subscribeError: 'There was an error subscribing- try again?' })
 				}
 			})
