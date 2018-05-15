@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import superagent from 'superagent';
 
 const Backdrop = styled.div`
 position:fixed;
@@ -27,52 +28,63 @@ border-radius:5px;
 }
 `
 class Modal extends Component {
-	constructor(){
+	constructor() {
 		super();
-		this.state={};
+		this.state = {};
 	}
 
-	handleChange=(e)=>{
-		this.setState({email:e.target.value})
+	handleChange = (e) => {
+		this.setState({ email: e.target.value })
 	}
-	handleSubmit=(e)=>{
+	handleSubmit = (e) => {
 		e.preventDefault()
 		let email = this.state.email
 		//do mail-list submit thing here
+		this.props.apiNewsletterSubscribe(email)
+		.then((response) => {
+				console.log(response)
+				if (response.status === 200) {
+					localStorage.setItem('subscribed', true)
+					this.setState({ subscribed: true, subscribeError: false })
+					setTimeout(this.props.closeModal, 3000)
+				} else {
+					this.setState({ subscribeError: 'There was an error subscribing- try again?' })
+				}
+			})
 		//then, as a callback:
-		localStorage.setItem('subscribed',true)
-		this.setState({subscribed:true})
-		setTimeout(this.props.closeModal,3000)
+
 	}
 
 	render() {
-		return <ReactCSSTransitionGroup 
-					transitionName='fade'
-					transitionEnterTimeout={500}
-					transitionLeaveTimeout={500}
-					>
-		{!this.props.display? null :
+		return <ReactCSSTransitionGroup
+			transitionName='fade'
+			transitionEnterTimeout={500}
+			transitionLeaveTimeout={500}
+		>
+			{!this.props.display ? null :
 				<Backdrop onClick={this.props.closeModal}>
-					<Modalbox onClick={(e)=>e.stopPropagation()}>
-						{this.state.subscribed ? 
-						<p className="modal__text">
-							Thanks for subscribing!
-						</p>:[
-						<p className="modal__text" key='1'>
-							We’re so pumped that you’re here discovering new local music! Consider joining our KickDrum Newsletter to keep your finger on the pulse of the Montréal music scene.
+					<Modalbox onClick={(e) => e.stopPropagation()}>
+						{this.state.subscribed ?
+							<p className="modal__text">
+								Thanks for subscribing!
+						</p> : [
+								<p className="modal__text" key='1'>
+									We’re so pumped that you’re here discovering new local music! Consider joining our KickDrum Newsletter to keep your finger on the pulse of the Montréal music scene.
 						</p>,
-						<form className='modal__form' onSubmit={this.handleSubmit} key='2'>
-							<input className='modal__form__input' onChange={this.handleChange} placeholder='enter your email here'></input>
-							<button className="modal__button">
-								Submit
+								<form className='modal__form' onSubmit={this.handleSubmit} key='2'>
+									<input name='EMAIL' className='modal__form__input' onChange={this.handleChange} placeholder='enter your email here'></input>
+									<button className="modal__button">
+										Subscribe
 							</button>
-						</form>]
-						}
+								</form>]}
+						{this.state.subscribeError ? <div className="modal__error"><span className="modal__error__text">{this.state.subscribeError}</span></div> : null}
+
+
 					</Modalbox>
 				</Backdrop>
-		}
+			}
 		</ReactCSSTransitionGroup>
-		
+
 	}
 }
 

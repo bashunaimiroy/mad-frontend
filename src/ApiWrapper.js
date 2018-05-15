@@ -19,7 +19,9 @@ let config = {
   const storageRef = storage.ref('');
 
 class Api {
-
+    subscribeToNewsletter = (email)=>{
+        return superagent.post(`${apiHost}/api/v1/newsletter-subscribe`).send({email:email})
+    }
     uploadImage = (image,id)=>{
         return storageRef
         .child(`images/temp/${id}_temp.jpg`)

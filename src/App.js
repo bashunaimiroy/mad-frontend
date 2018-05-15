@@ -139,7 +139,7 @@ class App extends Component {
 				<ScrollWithRouter>
 				<div className="App" >
 
-					<Modal closeModal={this.closeModal} display={this.state.showModal} key="unique-key" />
+					<Modal closeModal={this.closeModal} display={this.state.showModal} apiNewsletterSubscribe={api.subscribeToNewsletter}key="unique-key" />
 					<Route render={(props)=><NavBar {...props} loadBandIDs={this.loadBandIDs} />}>
 						
 					</Route>
