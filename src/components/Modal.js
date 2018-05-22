@@ -70,7 +70,7 @@ class Modal extends Component {
 								Thanks for subscribing!
 						</p> : [
 								<p className="modal__text" key='1'>
-									We’re so pumped that you’re here discovering new local music! Consider joining our KickDrum Newsletter to keep your finger on the pulse of the Montréal music scene.
+									Every artist you see here is based in Montréal. Join our newsletter if you want to hear about new releases and live events!
 						</p>,
 								<form className='modal__form' onSubmit={this.handleSubmit} key='2'>
 									<input name='EMAIL' className='modal__form__input' onChange={this.handleChange} placeholder='enter your email here'></input>
