@@ -72,6 +72,13 @@ line-height:39px;
 .about__section{
   margin: 40px 0;
 }
+.about__section--center{
+  text-align:center;
+}
+.about__language-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 
 #logo {
@@ -131,7 +138,11 @@ color:grey;
   max-width: 80%;
 }
 .modal__text{
+  line-height:1.4;
   padding:15px 10px;
+}
+.modal__form{
+  text-align:center;
 }
 .modal__form__input{
   font-size:1rem;
