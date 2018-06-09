@@ -8,7 +8,7 @@ import FontAwesome from "react-fontawesome"
 const SocialMediaButton = (props)=>{
         return (<div className="SocialMediaButton">
             <a target="_blank" href={props.url}>
-                <FontAwesome size="3x" name={props.name} />
+                <FontAwesome size={props.size} name={props.name} />
             </a>
             </div>)
             
@@ -16,9 +16,10 @@ const SocialMediaButton = (props)=>{
 
 
 const ButtonLine = (props) => {
+    let size = props.size || "3x"
     return (<div style={{ display: "flex" }}>
       {props.links.map((link, index) => {
-        return <SocialMediaButton name={link.name} url={link.url} key={index} />
+        return <SocialMediaButton name={link.name} url={link.url} key={index} size={size}/>
       })}</div>)
   }
   const ButtonGrid = (props) => 

@@ -39,7 +39,7 @@ class ProfilePage extends Component {
     let bandInfo = <div className="ProfilePage">
       <img id="profile-photo" src={this.props.bandObject.full_photo_url} alt={this.props.bandObject.band_name} />
       <h1 className="profile__heading">{this.props.bandObject.band_name}</h1>
-      <ButtonLine links={linkChecker(this.props.bandObject)} />
+      <ButtonLine links={linkChecker(this.props.bandObject)} size="3x"/>
       <div><h3 className="profile__subheading">Genre:</h3> {this.props.bandObject.band_genre}</div>
       <MemberList members={this.props.bandObject.members} />
       <ContactList contacts={emailChecker(this.props.bandObject)} />

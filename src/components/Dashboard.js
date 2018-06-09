@@ -4,11 +4,21 @@ import PreviewPane from './PreviewPane';
 import logo from "../mad-logo.png"
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
+import { ButtonLine } from './SocialMediaButton';
 
 
 class Dashboard extends Component {
 
-
+  kickDrumLinks = [
+    {name:"facebook",url:"https://www.facebook.com/kickdrumMTL"},
+    {name:"instagram",url:"https://www.instagram.com/kickdrummtl"},
+    {name:"twitter",url:"https://www.twitter.com/KickDrumMTL"},
+    {name:"soundcloud",url:"https://www.soundcloud.com/kickdrummtl"},
+    {name:"spotify",url:"http://spoti.fi/2H3XdzC"},
+    {name:"youtube",url:"https://www.youtube.com/channel/UCs_OZ1ylUehBu7zEbiAm-oA"},
+    
+  ]
+ 
   render() {
     //this obtains shorter variable names by destructuring this.props
     const { bands, getTwelveBands,moreResults, genreDisplayed, searchtermDisplayed, resultsLoaded } = this.props
@@ -41,7 +51,9 @@ class Dashboard extends Component {
 
     return (
       <div className="Dashboard">
-        
+        <div className="Dashboard__social-media-icons">
+          <ButtonLine links={this.kickDrumLinks} size="2x"/>
+        </div>
 
         {resultsLoaded ?
           results : <span className="little-message">loading artists...</span>

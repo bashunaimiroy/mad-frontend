@@ -5,13 +5,22 @@ import SearchBar from "./SearchBar";
 import GenreFilter from "./GenreFilter";
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome'
+import {ButtonLine} from './SocialMediaButton'
 
 class NavBar extends Component {
   constructor() {
     super()
     this.state = { genre: "", searchterm: "", navbarState: "hidden", showSearch: false }
   }
-
+  kickDrumLinks = [
+    {name:"facebook",url:"https://www.facebook.com/kickdrumMTL"},
+    {name:"instagram",url:"https://www.instagram.com/kickdrummtl"},
+    {name:"twitter",url:"https://www.twitter.com/KickDrumMTL"},
+    {name:"soundcloud",url:"https://www.soundcloud.com/kickdrummtl"},
+    {name:"spotify",url:"http://spoti.fi/2H3XdzC"},
+    {name:"youtube",url:"https://www.youtube.com/channel/UCs_OZ1ylUehBu7zEbiAm-oA"},
+    
+  ]
   handleGenreChange = (genreObject) => {
     this.navFoldUp()
     //this changes the controlled component value and clears the current searchterm
@@ -48,11 +57,14 @@ class NavBar extends Component {
       <div className="NavBar" onClick={this.props.onClick}>
       <div className="nav-category nav-category--center">
         <div className="nav-category nav-category__spacer--left">
-        {/* nothing in here, just takes up space */}
+          {/* nothing in here, just takes up space */}
         </div>
         <div className="nav-category logo-category">
           <div className="logo-category__logo">
             <Link onClick={this.navFoldUp} to="/"><img src={linelogo} alt="logo" id="navbar-logo"/></Link>
+            {/* <div className="logo-category__social-media-icons">
+              <ButtonLine links={this.kickDrumLinks} size="1x"/>
+            </div> */}
           </div>
         </div>
         <button className="nav-category--right" onClick={this.navToggle} id="toggle">
