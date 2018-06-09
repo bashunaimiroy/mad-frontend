@@ -38,7 +38,8 @@ class Submit extends Component {
   constructor() {
     super()
     this.state = {
-      admin_genre: { value: false, label: "Choose One" }
+      admin_genre: { value: false, label: "Choose One" },
+      buttonText: "Submit"
     }
   }
 
@@ -115,15 +116,22 @@ class Submit extends Component {
     console.log("bandObj is", bandObj,". now submitting")
     return api.submitBand(bandObj)
   }
+  confirmSubmission = () => {
+    console.log('submission confirmed, clearing form')
+    this.setState({buttonText:"Thanks!"})
+    document.getElementById("band-submit-form").reset();
+  }
 
   formSubmit = (e) => {
     e.preventDefault()
+    console.log('form submitting')
     this.addBandToDatabase()
-      .then(response => {
-        console.log("uploading image",this.state.chosenImage,"with response",response)
+      .then(response => 
         api.uploadImage(this.state.chosenImage, response.body.insertedId)
-        .then(snapshot=>console.log(snapshot))
-      })
+      )      
+      .then(()=>
+        this.confirmSubmission()        
+      )      
   }
 
   render() {
@@ -131,7 +139,7 @@ class Submit extends Component {
       <div className="Submit">
 
         <h1>Submit</h1>
-        <form onSubmit={this.formSubmit}>
+        <form id="band-submit-form" onSubmit={this.formSubmit}>
           <fieldset className="submit__image-drop">
             {!this.state.imagePreviewUrl ?
               [<Dropzone
@@ -189,7 +197,7 @@ class Submit extends Component {
             <input type="email" placeholder="Booking Email" onChange={e => this.setState({ booking_email: e.target.value })} />
             <input type="email" placeholder="PR Email" onChange={e => this.setState({ pr_email: e.target.value })} />
           </fieldset>
-          <Button>Submit</Button>
+          <Button>{this.state.buttonText}</Button>
         </form>
 
       </div>
