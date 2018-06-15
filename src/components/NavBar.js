@@ -62,9 +62,9 @@ class NavBar extends Component {
         <div className="nav-category logo-category">
           <div className="logo-category__logo">
             <Link onClick={this.navFoldUp} to="/"><img src={linelogo} alt="logo" id="navbar-logo"/></Link>
-            {/* <div className="logo-category__social-media-icons">
-              <ButtonLine links={this.kickDrumLinks} size="1x"/>
-            </div> */}
+            <div className="logo-category__social-media-icons">
+              <ButtonLine links={this.kickDrumLinks} size="2x"/>
+            </div>
           </div>
         </div>
         <button className="nav-category--right" onClick={this.navToggle} id="toggle">

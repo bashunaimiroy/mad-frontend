@@ -23,7 +23,8 @@ border:0px;
 height:50px;
 `
 
-const DeleteButton = styled.button`
+const DeleteButton = styled.button.attrs({
+  type: "button"})`
 color:white;
 border:0px;
 height:60px;
@@ -31,6 +32,10 @@ width:60px;
 background-color:rgba(0,0,0,0.2);
 position: absolute;
 right:0;
+`
+const SubmissionMessage = styled.div`
+margin: 20px 0;
+text-align:center;
 `
 
 class Submit extends Component {
@@ -71,8 +76,7 @@ class Submit extends Component {
 
 
 
-  removeImage = (event) => {
-    event.preventDefault()
+  removeImage = () => {
     window.URL.revokeObjectURL(this.state.imagePreviewUrl)
     this.setState({ imagePreviewUrl: null })
   }
@@ -118,12 +122,14 @@ class Submit extends Component {
   }
   confirmSubmission = () => {
     console.log('submission confirmed, clearing form')
-    this.setState({buttonText:"Thanks!"})
+    this.setState({submissionLoading:false,submissionComplete:true})
     document.getElementById("band-submit-form").reset();
+    this.removeImage();
   }
 
   formSubmit = (e) => {
     e.preventDefault()
+    this.setState({submissionLoading:true})
     console.log('form submitting')
     this.addBandToDatabase()
       .then(response => 
@@ -166,7 +172,7 @@ class Submit extends Component {
           </fieldset>
 
           <fieldset className="submit__field">
-            <input style={{ height: "50px", fontSize: "1.5em" }} placeholder="Artist Name" onChange={e => this.setState({ band_name: e.target.value })} />
+            <input required style={{ height: "50px", fontSize: "1.5em" }} placeholder="Artist Name" onChange={e => this.setState({ band_name: e.target.value })} />
           </fieldset>
 
           <fieldset className="submit__field">
@@ -197,7 +203,9 @@ class Submit extends Component {
             <input type="email" placeholder="Booking Email" onChange={e => this.setState({ booking_email: e.target.value })} />
             <input type="email" placeholder="PR Email" onChange={e => this.setState({ pr_email: e.target.value })} />
           </fieldset>
-          <Button>{this.state.buttonText}</Button>
+          {this.state.submissionLoading ? <SubmissionMessage>Please Wait, submitting your band...</SubmissionMessage> : 
+            this.state.submissionComplete ? <SubmissionMessage>Thanks! We're working on adding your submission!</SubmissionMessage> :
+            <Button>Submit</Button> }
         </form>
 
       </div>

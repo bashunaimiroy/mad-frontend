@@ -51,9 +51,9 @@ class Dashboard extends Component {
 
     return (
       <div className="Dashboard">
-        <div className="Dashboard__social-media-icons">
+        {/* <div className="Dashboard__social-media-icons">
           <ButtonLine links={this.kickDrumLinks} size="2x"/>
-        </div>
+        </div> */}
 
         {resultsLoaded ?
           results : <span className="little-message">loading artists...</span>

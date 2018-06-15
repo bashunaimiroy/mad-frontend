@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard'
 import Submit from './components/Submit'
 import About from './components/About'
 import NavBar from './components/NavBar';
+import SpotifyWidget from './components/SpotifyWidget';
 import ProfilePage from './components/ProfilePage'
 import api from './ApiWrapper'
 import Modal from './components/Modal'
@@ -140,7 +141,7 @@ class App extends Component {
 				<div className="App" >
 
 					<Modal closeModal={this.closeModal} display={this.state.showModal} apiNewsletterSubscribe={api.subscribeToNewsletter}key="unique-key" />
-					<Route render={(props)=><NavBar {...props} loadBandIDs={this.loadBandIDs} />}>
+					<Route render={(props)=>[<NavBar {...props} loadBandIDs={this.loadBandIDs} />, <SpotifyWidget/>]}>
 						
 					</Route>
 					<Route exact path="/" render={(props) => (

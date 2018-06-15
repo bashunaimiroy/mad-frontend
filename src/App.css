@@ -13,7 +13,7 @@ a {
 
 body {
   /* to avoid the navbar overlapping content */
-  padding-top: 60px;
+  padding-top: 100px;
   
 }
 body * {
@@ -170,6 +170,7 @@ color:grey;
 }
 
 .NavBar a {
+  color:black;
   margin: 0px 10px;
 }
 
@@ -198,6 +199,15 @@ color:grey;
   display:flex;
   justify-content: center;
 }
+.logo-category__social-media-icons .SocialMediaButton{
+font-size:11px;
+}
+@media screen and (min-width:576px){
+  .logo-category__social-media-icons .SocialMediaButton{
+  font-size:13px;
+  }
+}
+
 #navbar-logo{
  width: 230px; 
 
@@ -282,6 +292,11 @@ color:grey;
   margin:5px 0px;
   width:100%;
 }
+@media screen and (max-width:992px){
+    .widget-container {
+      display:none;
+  }
+}
 
 .fade-enter{
   opacity:0;
@@ -316,7 +331,7 @@ color:grey;
 }
 @media screen and (min-width:576px){
   body{
-    padding-top:103px;
+    padding-top:133px;
   }
   #navbar-logo{
     width:unset;

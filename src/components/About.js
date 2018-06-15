@@ -98,7 +98,7 @@ class About extends Component {
         </p>
 
           <p className="about__paragraph">
-            Also, if you spot any broken links or false, outdated or missing information we’d really appreciate you <a href="mailto:events@kickdrum.ca">sending us a message</a>!
+            Also, if you spot any broken links or false, outdated or missing information we’d really appreciate you <a href="mailto:katalogue@kickdrum.ca">sending us a message</a>!
         </p></div>
 
         <div className="about__section"><h2 className="about__subheading">
@@ -118,20 +118,10 @@ class About extends Component {
         </h2>
 
           <p className="about__paragraph">
-            For all inquiries e-mail us at <a href="mailto:events@kickdrum.ca">events@kickdrum.ca</a> or send us a direct message on <a href="https://www.facebook.com/kickdrumMTL">Facebook</a>!
+            For all inquiries e-mail us at <a href="mailto:katalogue@kickdrum.ca">katalogue@kickdrum.ca</a> or send us a direct message on <a href="https://www.facebook.com/kickdrumMTL">Facebook</a>!
         </p>
 
-          <p className="about__paragraph">
-            Follow us on our social media accounts below
-          </p>
-
-          <p className="social-media-url"><a href="https://www.facebook.com/kickdrumMTL">Facebook</a></p>
-          <p className="social-media-url"><a href="https://instagram.com/kickdrummtl/">Instagram</a></p>
-          <p className="social-media-url"><a href="https://twitter.com/KickDrumMtl">Twitter</a></p>
-          <p className="social-media-url"><a href="https://www.youtube.com/channel/UCs_OZ1ylUehBu7zEbiAm-oA">Youtube</a></p>
-          <p className="social-media-url"><a href="http://spoti.fi/2H3XdzC">Spotify</a></p>
-          <p className="social-media-url"><a href="https://soundcloud.com/kickdrummtl">Soundcloud</a></p>
-          <p className="social-media-url"><a href="https://playmoss.com/en/kickdrummtl">Playmoss</a></p>
+    
         </div>
 
       </div>
@@ -224,7 +214,7 @@ class About extends Component {
         </p>
 
           <p className="about__paragraph">
-          Aussi, si vous notez des liens brisés ou des informations fausses, manquantes ou périmées, nous apprécierons énormément que vous <a href="mailto:events@kickdrum.ca">nous envoyiez un message!</a>
+          Aussi, si vous notez des liens brisés ou des informations fausses, manquantes ou périmées, nous apprécierons énormément que vous <a href="mailto:katalogue@kickdrum.ca">nous envoyiez un message!</a>
         </p></div>
 
         <div className="about__section"><h2 className="about__subheading">
@@ -244,20 +234,10 @@ class About extends Component {
         </h2>
 
           <p className="about__paragraph">
-          Pour toutes questions svp écrivez-nous à <a href="mailto:events@kickdrum.ca">events@kickdrum.ca</a> ou envoyez-nous un message directement sur <a href="https://www.facebook.com/kickdrumMTL">Facebook</a>!              
+          Pour toutes questions svp écrivez-nous à <a href="mailto:katalogue@kickdrum.ca">katalogue@kickdrum.ca</a> ou envoyez-nous un message directement sur <a href="https://www.facebook.com/kickdrumMTL">Facebook</a>!              
         </p>
 
-          <p className="about__paragraph">
-          Suivez-nous sur nos médias sociaux aux liens suivants: 
-          </p>
-
-          <p className="social-media-url"><a href="https://www.facebook.com/kickdrumMTL">Facebook</a></p>
-          <p className="social-media-url"><a href="https://instagram.com/kickdrummtl/">Instagram</a></p>
-          <p className="social-media-url"><a href="https://twitter.com/KickDrumMtl">Twitter</a></p>
-          <p className="social-media-url"><a href="https://www.youtube.com/channel/UCs_OZ1ylUehBu7zEbiAm-oA">Youtube</a></p>
-          <p className="social-media-url"><a href="http://spoti.fi/2H3XdzC">Spotify</a></p>
-          <p className="social-media-url"><a href="https://soundcloud.com/kickdrummtl">Soundcloud</a></p>
-          <p className="social-media-url"><a href="https://playmoss.com/en/kickdrummtl">Playmoss</a></p>
+         
         </div>
 
       </div>
