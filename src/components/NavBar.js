@@ -26,7 +26,7 @@ class NavBar extends Component {
     //this changes the controlled component value and clears the current searchterm
     this.setState({ genre: genreObject, searchterm: "" })
     //then does the API call for the results for the genre, all in one action
-    this.props.loadBandIDs(genreObject.value)
+    this.props.setupDashboard(genreObject.value)
   }
   //but search is split into two functions:
   handleSearchChange = (e) => {
@@ -48,7 +48,7 @@ class NavBar extends Component {
     e.preventDefault()
     this.navFoldUp()
     this.setState({ genre: "" })
-    this.props.loadBandIDs("", this.state.searchterm)
+    this.props.setupDashboard("", this.state.searchterm)
     this.props.history.push('/')
   }
 
@@ -57,7 +57,7 @@ class NavBar extends Component {
       <div className="NavBar" onClick={this.props.onClick}>
       <div className="nav-category nav-category--center">
         <div className="nav-category nav-category__spacer--left">
-          {/* nothing in here, just takes up space */}
+          {/* nothing in here, just needs to take up space */}
         </div>
         <div className="nav-category logo-category">
           <div className="logo-category__logo">
@@ -118,6 +118,6 @@ class NavBar extends Component {
 }
 
 NavBar.propTypes = {
-  loadBandIDs: PropTypes.func.isRequired
+  setupDashboard: PropTypes.func.isRequired
 }
 export default NavBar;

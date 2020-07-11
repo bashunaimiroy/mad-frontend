@@ -17,6 +17,9 @@ class ArtistCard extends Component {
     }
   }
 
+  doNothing = () => {
+    
+  }
 
   validLinks = linkChecker(this.props.band)
 
@@ -30,7 +33,7 @@ class ArtistCard extends Component {
     //I used the react onMouseEnter and onMouseLeave events to make a hover overlay,
     //instead of css hover (which isn't supported in React afaik)
     return (
-      <div onMouseEnter={() => this.setHovered(true)}
+      <div onClick={this.doNothing} onMouseEnter={() => this.setHovered(true)}
         onMouseLeave={() => this.setHovered(false)}
 
         style={{ background:

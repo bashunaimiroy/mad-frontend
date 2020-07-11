@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PreviewPane from './PreviewPane';
+import SubGenreSidebar from './SubGenreSidebar';
 // import { Link } from "react-router-dom";
 import logo from "../mad-logo.png"
 import PropTypes from 'prop-types'
@@ -27,35 +28,43 @@ class Dashboard extends Component {
     const genreResultsMessage = genreDisplayed ? 
     <div className="results">
       <span key="genre" className="results__text">displaying results for {genreDisplayed}</span>
-      <FontAwesome name='times' onClick={this.props.resetDashboard}/>
+      <FontAwesome name='times' onClick={()=>this.props.setupDashboard()}/>
     </div> : null
   const searchResultsMessage = searchtermDisplayed ? 
   
-    <div className="results"><span key="searchterm" className="results__text">displaying results for "{searchtermDisplayed}"</span><FontAwesome name='times' onClick={this.props.resetDashboard}/></div> : null
+    <div className="results"><span key="searchterm" className="results__text">displaying results for "{searchtermDisplayed}"</span><FontAwesome name='times' onClick={()=>this.props.setupDashboard()}/></div> : null
 
     //this variable is only displayed if our filter/search request came back but no bands were passed in,
     //which should only happen if there were no results at all for that genre/searchterm
     const noResultsMessage = genreDisplayed ? <span className="results">No bands in {genreDisplayed}</span>
       : <span className="results">Sorry, we didn't have results for "{searchtermDisplayed}"</span>
-    
+
+
     //this variable will be either our results message + band cards, or the "no results" message
     const results = bands.length ? [
       genreResultsMessage,
       searchResultsMessage,
-      <PreviewPane key="PreviewPane" 
-      bands={bands} 
-      getTwelveBands={getTwelveBands} 
-      moreResults={moreResults} />
+      <div className="Dashboard__flex-container">
+        {genreDisplayed? <SubGenreSidebar 
+          inactiveSortedSubgenresArray = {this.props.inactiveSortedSubgenresArray} 
+          activeSubgenresObject = {this.props.activeSubgenresObject} 
+          activateSubgenre={this.props.activateSubgenre}
+          deactivateSubgenre={this.props.deactivateSubgenre}
+        /> : null}
+       
+        <PreviewPane key="PreviewPane" 
+        bands={bands} 
+        getTwelveBands={getTwelveBands} 
+        moreResults={moreResults} />
+        
+        {genreDisplayed? <div className="right-spacetaker"></div> : null}
+      </div>
     ] :
       noResultsMessage
 
     return (
       <div className="Dashboard">
-        {/* <div className="Dashboard__social-media-icons">
-          <ButtonLine links={this.kickDrumLinks} size="2x"/>
-        </div> */}
-
-        {resultsLoaded ?
+          {resultsLoaded ?
           results : <span className="little-message">loading artists...</span>
 
         }

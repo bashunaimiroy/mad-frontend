@@ -113,23 +113,48 @@ color:grey;
 
 .Dashboard {
   display: flex;
-  flex-direction: column;
+  flex-flow:column nowrap;
   align-items: center;
+  justify-content: center;
 }
 
 .Dashboard__social-media-icons {
   margin-bottom: 15px;
 }
 
-.grid-container {
-  width: 85%;
+.Dashboard__flex-container {
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
+
+.grid-container {
+  flex: 1 0 62%;
+  text-align: center;
+}
+
 
 .genre-filter {
   width: 200px;
 }
 .genre-filter Select{
   width:100%;
+}
+.subgenre-sidebar, .right-spacetaker{
+  display: none;
+  flex: 0 1 50%;
+  max-width:220px;
+}
+.subgenre-sidebar {
+  padding-left: 30px;
+}
+.subgenre-sidebar h3 {
+  font-size:1.2rem;
+  opacity: 0.5;
+}
+.subgenre-sidebar__list {
+  padding: 20px 0;
 }
 
 .image-size-warning{
@@ -205,6 +230,9 @@ font-size:11px;
 @media screen and (min-width:576px){
   .logo-category__social-media-icons .SocialMediaButton{
   font-size:13px;
+  }
+  .subgenre-sidebar, .right-spacetaker{
+    display:block;
   }
 }
 
